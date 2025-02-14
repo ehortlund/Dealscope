@@ -920,7 +920,7 @@ body {
     section.features {
         padding: 0px
         min-height: 100vh; /* Gör hero-sektionen lika hög som hela skärmens höjd */
-        margin-bottom: 160px;
+        margin-bottom: 115px;
     }
 
     .features {
