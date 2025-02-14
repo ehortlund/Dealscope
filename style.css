@@ -847,7 +847,7 @@ body {
     .hero {
         padding: 0px;
         margin: 0 25px;
-        margin-top: 145px; /* Luft från toppen */
+        margin-top: 115px; /* Luft från toppen */
         margin-bottom: 10px;
         text-align: center;
         text-rendering: optimizeLegibility;
@@ -920,7 +920,7 @@ body {
     section.features {
         padding: 0px
         min-height: 100vh; /* Gör hero-sektionen lika hög som hela skärmens höjd */
-        margin-bottom: 180px;
+        margin-bottom: 160px;
     }
 
     .features {
