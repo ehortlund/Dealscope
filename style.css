@@ -848,7 +848,7 @@ body {
         padding: 0px;
         margin: 0 25px;
         margin-top: 145px; /* Luft från toppen */
-        margin-bottom: 80px;
+        margin-bottom: 10px;
         text-align: center;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
@@ -864,10 +864,10 @@ body {
 
     .hero h1 {
         color: var(--medium-white);
-        font-size: 38px;
+        font-size:32px;
         font-weight: 550;
         line-height: 1.2;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -920,6 +920,7 @@ body {
     section.features {
         padding: 0px
         min-height: 100vh; /* Gör hero-sektionen lika hög som hela skärmens höjd */
+        margin-bottom: 180px;
     }
 
     .features {
