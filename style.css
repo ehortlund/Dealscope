@@ -1313,3 +1313,13 @@ body {
     
 }
   
+@media only screen and (max-width: 375px) {
+    /* Här lägger du in din anpassade CSS för iPhone SE */
+
+    .hero {
+        margin-bottom: 0;
+        margin-top: 80px;
+    }
+
+
+}    
