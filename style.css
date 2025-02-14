@@ -3,6 +3,7 @@
     --soft-white: #CCCCCC;
     --medium-white: #E9E9E9;
     --white: #F4F4F4;
+    --vantablack: #121212;
     --black: #1c1c1c;
     --dark-grey: #2B2A2A;
     --green: #3DA549;
@@ -31,7 +32,7 @@ body {
     margin: 0;
     padding: 0;
     color: var(--medium-white);
-    background-color: var(--black); /* Gör bakgrunden mörkare */
+    background-color: var(--vantablack); /* Gör bakgrunden mörkare */
     background-image: 
         linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px); /* Rutnätet */
@@ -48,7 +49,7 @@ body {
     top: 0;
     width: 100%;
     z-index: 1000;
-    background-color: var(--black);
+    background-color: var(--vantablack);
     background-image: 
     linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px); /* Rutnätet */
@@ -75,7 +76,7 @@ body {
     right: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--black); /* Mörk bakgrund */
+    background-color: var(--vantablack); /* Mörk bakgrund */
     justify-content: center; /* Centrera länkarna vertikalt */
     align-items: center; /* Centrera länkarna horisontellt */
     z-index: 1000;
@@ -762,7 +763,7 @@ body {
 /* Mobilanpassning */
 @media (max-width: 768px) {
     body {
-        background-color: var(--black); /* Mörk bakgrund */
+        background-color: var(--vantablack); /* Mörk bakgrund */
         margin: 0; /* Ta bort eventuella marginaler */
         overflow-x: hidden; /* Förhindrar horisontell scroll */
     }
@@ -780,7 +781,7 @@ body {
     
 
     .main-header {
-        background-color: var(--black); /* Mörk bakgrund */
+        background-color: var(--vantablack); /* Mörk bakgrund */
         background-image: 
         linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px); /* Rutnätet */
@@ -1124,7 +1125,7 @@ body {
         padding: 12px 25px; /* Luft inuti knappen */
         font-size: 18px; /* Textstorlek */
         font-weight: 550; /* Fet text */
-        background-color: var(--black); /* Bakgrundsfärg */
+        background-color: var(--vantablack); /* Bakgrundsfärg */
         color: var(--medium-white); /* Textfärg */
         text-align: center; /* Centrerad text */
         text-decoration: none; /* Ingen understrykning */
