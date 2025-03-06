@@ -1,0 +1,77 @@
+/* Sektionens wrapper */
+.deal-example-section {
+    margin-top: 100px;
+    padding: 0 15%;
+}
+
+/* Titel och underrubrik */
+.deal-example-title {
+    font-weight: 600;
+    font-size: 48px;
+    color: var(--medium-white);
+    margin-bottom: 10px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
+}
+
+.deal-example-subtitle {
+    font-size: 24px;
+    color: var(--medium-white);
+    margin-bottom: 30px;
+}
+
+/* Kortet som innehåller all info om dealen */
+.deal-example-card {
+    position: relative;
+    background-color: rgba(44, 44, 44, 0.434);
+    border: 2px solid var(--red);
+    padding: 20px 30px;
+    border-radius: 32px;
+    margin-bottom: 20px;
+}
+
+/* Texten uppe i högra hörnet */
+.stock-note {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--green);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Rubriker inom kortet */
+.deal-section-heading {
+    color: var(--red);
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+/* Listor inom deal-kortet */
+.deal-example-card ul {
+    list-style: disc;
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+/* Enskilda listpunkter */
+.deal-example-card li {
+    color: var(--medium-white);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+/* Stängt tillstånd */
+.deal-example-card[data-state="closed"] p,
+.deal-example-card[data-state="closed"] .deal-link {
+    display: none;
+}
+
+/* Öppet tillstånd */
+.deal-example-card[data-state="open"] {
+    /* Här kan du lägga till stilar för det öppna tillståndet */
+}

@@ -48,3 +48,21 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.observe(fadeIn); // Observera varje element med klassen 'fade-in'
     });
 });
+
+
+// Funktion för att skapa deal-kort
+function createDealCard(deal) {
+    var cardTemplate =
+      '<article class="deal-example-card">' +
+      '<h2 class="deal-section-heading">' +
+      deal.title +
+      '</h2>' +
+      '<p>' +
+      deal.description +
+      '</p>' +
+      '<a href="' +
+      deal.link +
+      '" class="deal-link">Read More</a>' +
+      '</article>';
+    return cardTemplate;
+  }
