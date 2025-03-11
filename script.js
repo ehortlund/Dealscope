@@ -108,14 +108,14 @@ const dealScope = {
       const dealsData = [
         {
           title: "Sweden-Brazil Defense Deal",
-          description: "Brief description of the deal...",
+          description: "Sweden’s Saab AB has signed a major agreement with Brazil to provide JAS Gripen fighter jets and military transport planes.",
           link: "#",
           category: "Defense",
           date: "2024-03-08",
         },
         {
           title: "Wallstreet AI Investments",
-          description: "Another deal description...",
+          description: "Wall Street firms are collectively investing trillions in AI-related infrastructure such as data centers, energy grids, and communication networks.",
           link: "#",
           category: "Finance",
           date: "2024-03-09",
