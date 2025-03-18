@@ -310,7 +310,6 @@ body {
 }
 
 /* Stängt tillstånd */
-.deal-example-card[data-state="closed"] .deal-description,
 .deal-example-card[data-state="closed"] .deal-details,
 .deal-example-card[data-state="closed"] .deal-link {
   display: none;
