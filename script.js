@@ -47,6 +47,32 @@ const dealScope = {
               console.log("Kort stängt");
             }
           }
+  
+          // Hantera "Read More"-klick
+          if (event.target.classList.contains("deal-link")) {
+            event.preventDefault(); // Förhindra standardlänk-beteende
+  
+            // Hämta deal-information
+            const dealCard = event.target.closest(".deal-example-card");
+            const dealTitle = dealCard.querySelector(".deal-section-heading").textContent;
+            const dealDescription = dealCard.querySelector(".deal-description").textContent;
+            const dealCategory = dealCard.querySelector(".deal-details li:nth-child(1)").textContent;
+            const dealDate = dealCard.querySelector(".deal-details li:nth-child(2)").textContent;
+  
+            // Uppdatera detaljinformationen
+            const dealDetailsContainer = document.querySelector(".deal-details-container");
+            dealDetailsContainer.innerHTML = `
+              <h2>${dealTitle}</h2>
+              <p>${dealDescription}</p>
+              <p>${dealCategory}</p>
+              <p>${dealDate}</p>
+              <button class="back-button">Tillbaka</button>
+            `;
+  
+            // Visa detaljinformationen och dölj deal-listan
+            dealsContainer.style.display = "none";
+            dealDetailsContainer.style.display = "block";
+          }
         });
       }
     },
@@ -123,6 +149,16 @@ const dealScope = {
         // Lägg till fler deals här
       ];
       this.generateDealCards(dealsData, ".deals-container");
+  
+      // Händelselyssnare för "Tillbaka"-knappen
+      const dealDetailsContainer = document.querySelector(".deal-details-container");
+      dealDetailsContainer.addEventListener("click", (event) => {
+        if (event.target.classList.contains("back-button")) {
+          // Visa deal-listan och dölj detaljinformationen
+          document.querySelector(".deals-container").style.display = "block";
+          dealDetailsContainer.style.display = "none";
+        }
+      });
     },
   };
   
