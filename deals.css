@@ -321,6 +321,43 @@ body {
     padding: 30px 40px; /* Mer utrymme inuti */
 }
 
+/* Detaljsida */
+.deal-details-container {
+    background-color: rgba(44, 44, 44, 0.243); /* Mörkare bakgrund */
+    padding: 30px;
+    margin: 150px auto;
+    max-width: 800px;
+    border-radius: 32px;
+    color: var(--medium-white);
+  }
+  
+  .deal-details-container h2 {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: var(--red);
+  }
+  
+  .deal-details-container p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  .back-button {
+    padding: 10px 20px;
+    background-color: var(--red);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: darkred;
+  }
+
 /* Footer styling */
 .footer {
     margin-left: 15%;

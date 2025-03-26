@@ -23,58 +23,64 @@ const dealScope = {
   
     // Funktion för att generera deal-kort (Deals-sidan)
     generateDealCards: function (deals, containerSelector) {
-      const dealsContainer = document.querySelector(".deals-container");
-      console.log("dealsContainer:", dealsContainer);
-      if (dealsContainer) {
+        const dealsContainer = document.querySelector(".deals-container");
+        console.log("dealsContainer:", dealsContainer);
+        if (dealsContainer) {
         deals.forEach((deal) => {
-          const cardHTML = this.createDealCard(deal);
-          dealsContainer.innerHTML += cardHTML;
+            const cardHTML = this.createDealCard(deal);
+            dealsContainer.innerHTML += cardHTML;
         });
-  
+    
         // Händelselyssnare för att hantera klick på kort (Deals-sidan)
         dealsContainer.addEventListener("click", function (event) {
-          console.log("Klickhändelse utlöst");
-          const card = event.target.closest(".deal-example-card");
-          console.log("Kort:", card);
-          if (card) {
+            console.log("Klickhändelse utlöst");
+            const card = event.target.closest(".deal-example-card");
+            console.log("Kort:", card);
+            if (card) {
             const state = card.getAttribute("data-state");
             console.log("Tillstånd:", state);
             if (state === "closed") {
-              card.setAttribute("data-state", "open");
-              console.log("Kort öppnat");
+                card.setAttribute("data-state", "open");
+                console.log("Kort öppnat");
             } else {
-              card.setAttribute("data-state", "closed");
-              console.log("Kort stängt");
+                card.setAttribute("data-state", "closed");
+                console.log("Kort stängt");
             }
-          }
-  
-          // Hantera "Read More"-klick
-          if (event.target.classList.contains("deal-link")) {
+            }
+    
+            // Hantera "Read More"-klick
+            if (event.target.classList.contains("deal-link")) {
             event.preventDefault(); // Förhindra standardlänk-beteende
-  
+    
             // Hämta deal-information
             const dealCard = event.target.closest(".deal-example-card");
             const dealTitle = dealCard.querySelector(".deal-section-heading").textContent;
             const dealDescription = dealCard.querySelector(".deal-description").textContent;
             const dealCategory = dealCard.querySelector(".deal-details li:nth-child(1)").textContent;
             const dealDate = dealCard.querySelector(".deal-details li:nth-child(2)").textContent;
-  
+    
             // Uppdatera detaljinformationen
             const dealDetailsContainer = document.querySelector(".deal-details-container");
             dealDetailsContainer.innerHTML = `
-              <h2>${dealTitle}</h2>
-              <p>${dealDescription}</p>
-              <p>${dealCategory}</p>
-              <p>${dealDate}</p>
-              <button class="back-button">Tillbaka</button>
+                <h2>${dealTitle}</h2>
+                <p>${dealDescription}</p>
+                <p>${dealCategory}</p>
+                <p>${dealDate}</p>
+                <button class="back-button">Tillbaka</button>
             `;
-  
+    
             // Visa detaljinformationen och dölj deal-listan
             dealsContainer.style.display = "none";
             dealDetailsContainer.style.display = "block";
-          }
+    
+            // Dölj rubriken direkt med JavaScript
+            const dealSectionTitle = document.querySelector(".deal-section-title");
+            if (dealSectionTitle) {
+                dealSectionTitle.style.display = "none";
+            }
+            }
         });
-      }
+        }
     },
   
     // Funktion för att hantera mobilnavigering (global)
@@ -157,6 +163,7 @@ const dealScope = {
           // Visa deal-listan och dölj detaljinformationen
           document.querySelector(".deals-container").style.display = "block";
           dealDetailsContainer.style.display = "none";
+          dealDetailsContainer.classList.remove("active-details"); /* MARKERAD */
         }
       });
     },
