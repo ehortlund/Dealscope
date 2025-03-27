@@ -332,7 +332,7 @@ body {
   }
   
   .deal-details-container h2 {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 500;
     margin-bottom: 20px;
     color: var(--red);

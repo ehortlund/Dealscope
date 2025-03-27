@@ -66,7 +66,7 @@ const dealScope = {
                 <p>${dealDescription}</p>
                 <p>${dealCategory}</p>
                 <p>${dealDate}</p>
-                <button class="back-button">Tillbaka</button>
+                <button class="back-button">Go back</button>
             `;
     
             // Visa detaljinformationen och dölj deal-listan
@@ -165,6 +165,7 @@ const dealScope = {
           dealDetailsContainer.style.display = "none";
           dealDetailsContainer.classList.remove("active-details"); /* MARKERAD */
         }
+        
       });
     },
   };
