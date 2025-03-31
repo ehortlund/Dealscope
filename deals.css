@@ -271,7 +271,7 @@ body {
 
 /* Rubriker inom kortet */
 .deal-section-heading {
-    color: var(--medium-white);
+    color: var(--red);
     margin-top: 20px;
     margin-bottom: 10px;
     font-size: 20px;
@@ -348,14 +348,17 @@ body {
     background-color: var(--red);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 32px;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif;
     font-size: 1em;
     transition: background-color 0.3s ease;
   }
   
   .back-button:hover {
-    background-color: darkred;
+    background-color: transparent;
+    border-color: var(--red);
+    border: solid var(--red);
   }
 
 /* Footer styling */

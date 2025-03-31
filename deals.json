@@ -1,0 +1,24 @@
+[
+    {
+      "title": "Sweden-Brazil Defense Deal",
+      "description": "Sweden’s Saab AB has signed a major agreement with Brazil to provide JAS Gripen fighter jets and military transport planes.",
+      "link": "#",
+      "category": "Defense",
+      "date": "2024-03-08",
+      "subcontractors": [
+        "Embraer S.A. (NYSE: ERJ): Local assembly, production, and aircraft testing.",
+        "AEL Sistemas (Private): Avionics systems integration and development.",
+        "GE Aviation (General Electric, NYSE: GE): Engines (F414-GE-396) for the Gripen NG aircraft.",
+        "Saab Aerostructures (Part of Saab AB, SAAB-B): Design and production of structural components.",
+        "Akaer Engenharia (Private): Structural engineering and fuselage components."
+      ]
+    },
+    {
+      "title": "Wallstreet AI Investments",
+      "description": "Wall Street firms are collectively investing trillions in AI-related infrastructure such as data centers, energy grids, and communication networks.",
+      "link": "#",
+      "category": "Finance",
+      "date": "2024-03-09",
+      "subcontractors": []
+    }
+  ]
