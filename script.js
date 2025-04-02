@@ -12,9 +12,7 @@ const dealScope = {
             '<li>Category: ' + deal.category + '</li>' +
             '<li>Date: ' + deal.date + '</li>' +
             '</ul>' +
-            '<a href="' +
-            deal.link +
-            '" class="deal-link">Read More</a>' +
+            '<button class="deal-link-button" data-link="' + deal.link + '">Read More</button>' +
             '</article>';
         return cardTemplate;
     },
@@ -44,7 +42,7 @@ const dealScope = {
                     }
                 }
 
-                if (event.target.classList.contains("deal-link")) {
+                if (event.target.classList.contains("deal-link-button")) {
                     event.preventDefault();
 
                     const dealCard = event.target.closest(".deal-example-card");

@@ -271,7 +271,7 @@ body {
 
 /* Rubriker inom kortet */
 .deal-section-heading {
-    color: var(--red);
+    color: var(--medium-white);
     margin-top: 20px;
     margin-bottom: 10px;
     font-size: 20px;
@@ -321,6 +321,29 @@ body {
     padding: 30px 40px; /* Mer utrymme inuti */
 }
 
+.deal-link-button {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 450;
+    background-color: var(--red);
+    color: white;
+    padding: 10px 20px;
+    border: 1px solid var(--red);
+    cursor: pointer;
+    border-radius: 32px;
+    text-decoration: none;
+    transition: all 0.3s ease; /* Smidig övergång */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.2px;
+}
+
+.deal-link-button:hover {
+    background-color: transparent;
+    color: var(--red);
+}
+
 /* Detaljsida */
 .deal-details-container {
     background-color: rgba(44, 44, 44, 0.243); /* Mörkare bakgrund */
@@ -328,6 +351,7 @@ body {
     margin: 150px auto;
     max-width: 800px;
     border-radius: 32px;
+    border: var(--red) 1px solid;
     color: var(--medium-white);
   }
   
@@ -344,21 +368,26 @@ body {
   }
   
   .back-button {
-    padding: 10px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
     background-color: var(--red);
     color: white;
-    border: none;
-    border-radius: 32px;
+    padding: 10px 20px;
+    border: 1px solid var(--red);
     cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
+    border-radius: 32px;
+    text-decoration: none;
+    transition: all 0.3s ease; /* Smidig övergång */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
   }
   
   .back-button:hover {
     background-color: transparent;
-    border-color: var(--red);
-    border: solid var(--red);
+    color: var(--red);
   }
 
 /* Footer styling */
