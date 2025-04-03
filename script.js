@@ -49,17 +49,29 @@ const dealScope = {
                     const dealTitle = dealCard.querySelector(".deal-section-heading").textContent;
 
                     fetch("deals.json")
-                        .then(response => response.json())
-                        .then(data => {
-                            const deal = data.find(deal => deal.title === dealTitle);
+                        .then((response) => response.json())
+                        .then((data) => {
+                            const deal = data.find((deal) => deal.title === dealTitle);
                             if (deal) {
+                                // Generera header-information
+                                const dealDetailsHeader = document.querySelector(".deal-details-header");
+                                dealDetailsHeader.innerHTML = `
+                                    <h2>${deal.title}</h2>
+                                    <p>${deal.description}</p>
+                                `;
+
+                                // Generera detaljsidan
                                 const dealDetailsContainer = document.querySelector(".deal-details-container");
                                 dealDetailsContainer.innerHTML = dealScope.generateDealDetails(deal);
 
+                                // Visa header och detaljsidan
+                                dealDetailsHeader.style.display = "block";
                                 dealDetailsContainer.style.display = "block";
 
+                                // Dölj deal-listan
                                 dealsContainer.style.display = "none";
 
+                                // Dölj rubriken direkt med JavaScript
                                 const dealSectionTitle = document.querySelector(".deal-section-title");
                                 if (dealSectionTitle) {
                                     dealSectionTitle.style.display = "none";
@@ -73,17 +85,17 @@ const dealScope = {
 
     generateDealDetails: function (deal) {
         return `
-            <h2>${deal.title}</h2>
-            <p>${deal.description}</p>
-            <ul>
-                <li>Category: ${deal.category}</li>
-                <li>Date: ${deal.date}</li>
-            </ul>
-            <h3>Potential Subcontractors and Partners</h3>
-            <ul>
-                ${deal.subcontractors.map(subcontractor => `<li>${subcontractor}</li>`).join("")}
-            </ul>
-            <button class="back-button">Go back</button>
+            <div class="deal-details-content">
+                <ul>
+                    <li>Category: ${deal.category}</li>
+                    <li>Date: ${deal.date}</li>
+                </ul>
+                <h3>Potential Subcontractors and Partners</h3>
+                <ul>
+                    ${deal.subcontractors.map(subcontractor => `<li>${subcontractor}</li>`).join("")}
+                </ul>
+                <button class="back-button">Go back</button>
+            </div>
         `;
     },
 
@@ -138,16 +150,16 @@ const dealScope = {
 
         console.log("Hämtar deals.json...");
         fetch("deals.json")
-            .then(response => {
+            .then((response) => {
                 console.log("Response:", response);
                 return response.json();
             })
-            .then(data => {
+            .then((data) => {
                 console.log("Data:", data);
                 this.generateDealCards(data, ".deals-container");
                 console.log("generateDealCards anropad");
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error("Fel vid hämtning av deals.json:", error);
             });
 
@@ -155,6 +167,7 @@ const dealScope = {
         dealDetailsContainer.addEventListener("click", (event) => {
             if (event.target.classList.contains("back-button")) {
                 document.querySelector(".deals-container").style.display = "block";
+                document.querySelector(".deal-details-header").style.display = "none";
                 dealDetailsContainer.style.display = "none";
 
                 const dealSectionTitle = document.querySelector(".deal-section-title");
