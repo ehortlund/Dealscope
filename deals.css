@@ -373,6 +373,7 @@ body {
     background-color: rgba(44, 44, 44, 0.243); /* Mörkare bakgrund */
     padding: 30px;
     margin: 0px auto;
+    margin-bottom: 200px;
     max-width: 800px;
     border-radius: 32px;
     border: var(--red) 1px solid;
@@ -413,6 +414,11 @@ body {
     background-color: transparent;
     color: var(--red);
   }
+
+  .stock-symbol {
+    color: var(--green); /* Eller någon annan grön färg du föredrar */
+    font-weight: bolder; /* Återställ eventuell fetstil från omgivande text om det behövs */
+}
 
 /* Footer styling */
 .footer {

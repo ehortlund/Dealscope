@@ -5,11 +5,16 @@
       "link": "#",
       "category": "Defense",
       "date": "2024-03-08",
+      "dealValue": "$5 Billion",
+      "industry": "Defense and Aerospace",
+      "buyer": "Brazilian Air Force",
+      "seller": "Saab AB (<span class=\"stock-symbol\">SAAB-B</span>)",
+      "impact": "This strategic partnership focuses on delivering 36 Gripen NG fighter jets to the Brazilian Air Force, transferring advanced technology, and establishing local production to bolster Brazil’s defense sector.",
       "subcontractors": [
-        "Embraer S.A. (NYSE: ERJ): Local assembly, production, and aircraft testing.",
+        "Embraer S.A. (<span class=\"stock-symbol\">NYSE: ERJ</span>): Local assembly, production, and aircraft testing.",
         "AEL Sistemas (Private): Avionics systems integration and development.",
-        "GE Aviation (General Electric, NYSE: GE): Engines (F414-GE-396) for the Gripen NG aircraft.",
-        "Saab Aerostructures (Part of Saab AB, SAAB-B): Design and production of structural components.",
+        "GE Aviation (General Electric, <span class=\"stock-symbol\">NYSE: GE</span>): Engines (F414-GE-396) for the Gripen NG aircraft.",
+        "Saab Aerostructures (Part of Saab AB, <span class=\"stock-symbol\">SAAB-B</span>): Design and production of structural components.",
         "Akaer Engenharia (Private): Structural engineering and fuselage components."
       ]
     },
@@ -19,6 +24,11 @@
       "link": "#",
       "category": "Finance",
       "date": "2024-03-09",
+      "dealValue": "Trillions of USD",
+      "industry": "Finance and Technology",
+      "buyer": "Various Wall Street Firms",
+      "seller": "Technology Providers, Energy Companies, Telecoms",
+      "impact": "Significant expansion of AI infrastructure, potential for new technological advancements and economic growth.",
       "subcontractors": []
     }
   ]

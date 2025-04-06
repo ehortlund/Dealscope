@@ -86,14 +86,25 @@ const dealScope = {
     generateDealDetails: function (deal) {
         return `
             <div class="deal-details-content">
-                <ul>
-                    <li>Category: ${deal.category}</li>
-                    <li>Date: ${deal.date}</li>
+                <h3>Deal Overview</h3>
+                <ul class="deal-overview-list">
+                    <li>Deal Value: <span>${deal.dealValue || 'N/A'}</span></li>
+                    <li>Industry: <span>${deal.industry || 'N/A'}</span></li>
+                    <li>Date: <span>${deal.date}</span></li>
+                    <li>Impact: <span>${deal.impact || 'N/A'}</span></li>
                 </ul>
+    
+                <h3>Major Contractors and Partners</h3>
+                <ul class="major-contractors-list">
+                    <li>Buyer: <span>${deal.buyer || 'N/A'}</span></li>
+                    <li>Seller: <span>${deal.seller || 'N/A'}</span></li>
+                </ul>
+    
                 <h3>Potential Subcontractors and Partners</h3>
-                <ul>
+                <ul class="potential-subcontractors-list">
                     ${deal.subcontractors.map(subcontractor => `<li>${subcontractor}</li>`).join("")}
                 </ul>
+    
                 <button class="back-button">Go back</button>
             </div>
         `;
