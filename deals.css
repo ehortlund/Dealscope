@@ -14,7 +14,7 @@
 .fade-in {
     opacity: 0;
     transform: translateY(20px); /* Flytta elementet nedåt initialt */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition: opacity 0.3s ease-out, transform 0.6s ease-out;
 }
 
 /* När elementet är synligt */
@@ -22,6 +22,8 @@
     opacity: 1;
     transform: translateY(0);
 }
+
+
 
 html {
     text-rendering: optimizeLegibility;
@@ -248,6 +250,7 @@ body {
 
 /* Kortet som innehåller all info om dealen */
 .deal-example-card {
+    transition: height 0.2s ease-in-out, padding 0.3s ease-in-out, margin-bottom 0.3s ease-in-out; /* Exempel på egenskaper att animera */
     position: relative;
     background-color: rgba(44, 44, 44, 0.434);
     border: 1px solid var(--red);
@@ -350,6 +353,16 @@ body {
     text-align: center;
     margin-top: 200px;
     margin-bottom: 50px;
+}
+
+.deal-section-heading {
+    font-size: 24px;
+    font-weight: 550;
+    color: var(--medium-white);
+    margin-bottom: 10px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .deal-details-header h2 {

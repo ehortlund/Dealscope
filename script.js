@@ -21,6 +21,7 @@ const dealScope = {
         const dealsContainer = document.querySelector(".deals-container");
         console.log("dealsContainer:", dealsContainer);
         if (dealsContainer) {
+            deals.innerHTML = '';
             deals.forEach((deal) => {
                 const cardHTML = this.createDealCard(deal);
                 dealsContainer.innerHTML += cardHTML;
@@ -53,25 +54,19 @@ const dealScope = {
                         .then((data) => {
                             const deal = data.find((deal) => deal.title === dealTitle);
                             if (deal) {
-                                // Generera header-information
                                 const dealDetailsHeader = document.querySelector(".deal-details-header");
                                 dealDetailsHeader.innerHTML = `
                                     <h2>${deal.title}</h2>
                                     <p>${deal.description}</p>
                                 `;
 
-                                // Generera detaljsidan
                                 const dealDetailsContainer = document.querySelector(".deal-details-container");
                                 dealDetailsContainer.innerHTML = dealScope.generateDealDetails(deal);
 
-                                // Visa header och detaljsidan
                                 dealDetailsHeader.style.display = "block";
                                 dealDetailsContainer.style.display = "block";
-
-                                // Dölj deal-listan
                                 dealsContainer.style.display = "none";
 
-                                // Dölj rubriken direkt med JavaScript
                                 const dealSectionTitle = document.querySelector(".deal-section-title");
                                 if (dealSectionTitle) {
                                     dealSectionTitle.style.display = "none";
@@ -93,18 +88,18 @@ const dealScope = {
                     <li>Date: <span>${deal.date}</span></li>
                     <li>Impact: <span>${deal.impact || 'N/A'}</span></li>
                 </ul>
-    
+
                 <h3>Major Contractors and Partners</h3>
                 <ul class="major-contractors-list">
                     <li>Buyer: <span>${deal.buyer || 'N/A'}</span></li>
                     <li>Seller: <span>${deal.seller || 'N/A'}</span></li>
                 </ul>
-    
+
                 <h3>Potential Subcontractors and Partners</h3>
                 <ul class="potential-subcontractors-list">
                     ${deal.subcontractors.map(subcontractor => `<li>${subcontractor}</li>`).join("")}
                 </ul>
-    
+
                 <button class="back-button">Go back</button>
             </div>
         `;
@@ -175,13 +170,18 @@ const dealScope = {
             });
 
         const dealDetailsContainer = document.querySelector(".deal-details-container");
+
         dealDetailsContainer.addEventListener("click", (event) => {
             if (event.target.classList.contains("back-button")) {
-                document.querySelector(".deals-container").style.display = "block";
-                document.querySelector(".deal-details-header").style.display = "none";
-                dealDetailsContainer.style.display = "none";
-
+                const dealDetailsHeader = document.querySelector(".deal-details-header");
+                const dealsContainer = document.querySelector(".deals-container");
                 const dealSectionTitle = document.querySelector(".deal-section-title");
+
+                // Återställ visning
+                dealDetailsHeader.style.display = "none";
+                dealDetailsContainer.style.display = "none";
+                dealsContainer.style.display = "block";
+
                 if (dealSectionTitle) {
                     dealSectionTitle.style.display = "block";
                 }
