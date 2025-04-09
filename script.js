@@ -18,64 +18,57 @@ const dealScope = {
     },
 
     generateDealCards: function (deals, containerSelector) {
-        const dealsContainer = document.querySelector(".deals-container");
-        console.log("dealsContainer:", dealsContainer);
+        const dealsContainer = document.querySelector(containerSelector);
         if (dealsContainer) {
-            deals.innerHTML = '';
-            deals.forEach((deal) => {
+            dealsContainer.innerHTML = '';
+            if (deals.length === 0) {
+                dealsContainer.innerHTML = '<p>No deals found matching your search.</p>';
+                return;
+            }
+            deals.forEach(deal => {
                 const cardHTML = this.createDealCard(deal);
                 dealsContainer.innerHTML += cardHTML;
             });
+            this.addDealCardEventListeners(dealsContainer);
+        }
+    },
 
-            dealsContainer.addEventListener("click", function (event) {
-                console.log("Klickhändelse utlöst");
-                const card = event.target.closest(".deal-example-card");
-                console.log("Kort:", card);
-                if (card) {
-                    const state = card.getAttribute("data-state");
-                    console.log("Tillstånd:", state);
-                    if (state === "closed") {
-                        card.setAttribute("data-state", "open");
-                        console.log("Kort öppnat");
-                    } else {
-                        card.setAttribute("data-state", "closed");
-                        console.log("Kort stängt");
-                    }
-                }
+    addDealCardEventListeners: function (dealsContainer) {
+        dealsContainer.addEventListener("click", (event) => {
+            const card = event.target.closest(".deal-example-card");
+            if (card) {
+                const state = card.getAttribute("data-state");
+                card.setAttribute("data-state", state === "closed" ? "open" : "closed");
+            }
 
-                if (event.target.classList.contains("deal-link-button")) {
-                    event.preventDefault();
+            if (event.target.classList.contains("deal-link-button")) {
+                event.preventDefault();
+                const dealCard = event.target.closest(".deal-example-card");
+                const dealTitle = dealCard.querySelector(".deal-section-heading").textContent;
+                this.showDealDetails(dealTitle);
+            }
+        });
+    },
 
-                    const dealCard = event.target.closest(".deal-example-card");
-                    const dealTitle = dealCard.querySelector(".deal-section-heading").textContent;
+    showDealDetails: function (dealTitle) {
+        fetch("deals.json")
+            .then(response => response.json())
+            .then(data => {
+                const deal = data.find(d => d.title === dealTitle);
+                if (deal) {
+                    const dealDetailsHeader = document.querySelector(".deal-details-header");
+                    const dealDetailsContainer = document.querySelector(".deal-details-container");
+                    const dealsContainer = document.querySelector(".deals-container");
+                    const dealSectionTitle = document.querySelector(".deal-section-title");
 
-                    fetch("deals.json")
-                        .then((response) => response.json())
-                        .then((data) => {
-                            const deal = data.find((deal) => deal.title === dealTitle);
-                            if (deal) {
-                                const dealDetailsHeader = document.querySelector(".deal-details-header");
-                                dealDetailsHeader.innerHTML = `
-                                    <h2>${deal.title}</h2>
-                                    <p>${deal.description}</p>
-                                `;
-
-                                const dealDetailsContainer = document.querySelector(".deal-details-container");
-                                dealDetailsContainer.innerHTML = dealScope.generateDealDetails(deal);
-
-                                dealDetailsHeader.style.display = "block";
-                                dealDetailsContainer.style.display = "block";
-                                dealsContainer.style.display = "none";
-
-                                const dealSectionTitle = document.querySelector(".deal-section-title");
-                                if (dealSectionTitle) {
-                                    dealSectionTitle.style.display = "none";
-                                }
-                            }
-                        });
+                    dealDetailsHeader.innerHTML = `<h2>${deal.title}</h2><p>${deal.description}</p>`;
+                    dealDetailsContainer.innerHTML = this.generateDealDetails(deal);
+                    dealDetailsHeader.style.display = "block";
+                    dealDetailsContainer.style.display = "block";
+                    dealsContainer.style.display = "none";
+                    if (dealSectionTitle) dealSectionTitle.style.display = "none";
                 }
             });
-        }
     },
 
     generateDealDetails: function (deal) {
@@ -154,6 +147,12 @@ const dealScope = {
         this.handleMobileNav();
         this.handleFadeInAnimations('.fade-in');
 
+        const openSearchInput = document.querySelector('.open-search-input');
+        const openSearchContainer = document.querySelector('.open-search-container');
+        const searchResultsDropdown = document.querySelector('.search-results-dropdown');
+        const dealsContainer = document.querySelector('.deals-container');
+        let allDeals = [];
+
         console.log("Hämtar deals.json...");
         fetch("deals.json")
             .then((response) => {
@@ -162,6 +161,7 @@ const dealScope = {
             })
             .then((data) => {
                 console.log("Data:", data);
+                allDeals = data; // Spara alla deals
                 this.generateDealCards(data, ".deals-container");
                 console.log("generateDealCards anropad");
             })
@@ -169,8 +169,64 @@ const dealScope = {
                 console.error("Fel vid hämtning av deals.json:", error);
             });
 
-        const dealDetailsContainer = document.querySelector(".deal-details-container");
+        if (openSearchInput && dealsContainer && searchResultsDropdown && openSearchContainer) {
+            openSearchInput.addEventListener('input', (event) => {
+                const searchTerm = event.target.value.toLowerCase();
+                let filteredResults = [];
 
+                if (searchTerm.length > 0 && searchResultsDropdown.style.display === 'block') {
+                    openSearchContainer.style.borderBottomColor = 'transparent';
+                } else {
+                    openSearchContainer.style.borderBottomColor = '';
+                    searchResultsDropdown.style.display = 'none';
+                }
+
+                if (searchTerm.length >= 2) {
+                    filteredResults = allDeals.filter(deal =>
+                        deal.title.toLowerCase().includes(searchTerm) ||
+                        deal.description.toLowerCase().includes(searchTerm)
+                    ).slice(0, 5);
+                }
+
+                searchResultsDropdown.innerHTML = '';
+                if (filteredResults.length > 0) {
+                    filteredResults.forEach(result => {
+                        const resultLink = document.createElement('a');
+                        resultLink.textContent = result.title;
+                        resultLink.href = '#';
+                        resultLink.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            openSearchInput.value = result.title;
+                            this.generateDealCards([result], dealsContainer);
+                            searchResultsDropdown.style.display = 'none';
+                            openSearchContainer.style.borderBottomColor = '';
+                        });
+                        searchResultsDropdown.appendChild(resultLink);
+                    });
+                    searchResultsDropdown.style.display = 'block';
+                } else if (searchTerm.length >= 2) {
+                    searchResultsDropdown.innerHTML = '<p>No matching deals found.</p>';
+                    searchResultsDropdown.style.display = 'block';
+                } else {
+                    searchResultsDropdown.style.display = 'none';
+                }
+
+                const overallFilter = allDeals.filter(deal =>
+                    deal.title.toLowerCase().includes(searchTerm) ||
+                    deal.description.toLowerCase().includes(searchTerm)
+                );
+                this.generateDealCards(overallFilter, dealsContainer);
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!openSearchInput.parentElement.contains(event.target)) {
+                    searchResultsDropdown.style.display = 'none';
+                    openSearchContainer.style.borderBottomColor = '';
+                }
+            });
+        }
+
+        const dealDetailsContainer = document.querySelector(".deal-details-container");
         dealDetailsContainer.addEventListener("click", (event) => {
             if (event.target.classList.contains("back-button")) {
                 const dealDetailsHeader = document.querySelector(".deal-details-header");

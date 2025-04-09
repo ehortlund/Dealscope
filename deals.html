@@ -48,7 +48,26 @@
 
     <!-- Deal Section -->
     <section class="deal-section">
-        <h1 class="deal-section-title fade-in">Deals</h1>
+        <h1 class="deal-section-title fade-in">Deal Dashboard</h1>
+
+            <!-- Sorteringsalternativ -->
+            <div class="deals-filter-bar fade-in">
+                <div class="open-search-container">
+                    <input type="text" class="open-search-input" placeholder="Open Search...">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="search-icon-button">
+                        <path d="M15.79 12.91l3.89 3.89c.176.176.46.176.636 0l1.414-1.414a.441.441 0 000-.636l-3.89-3.89a6 6 0 10-2.12 2.12zM10 16a6 6 0 110-12 6 6 0 010 12z"></path>
+                    </svg>
+                    <div class="search-results-dropdown">
+                    </div>
+                </div>
+                <div class="category-dropdown">
+                    <button class="category-button">Category <svg viewBox="0 0 24 24" fill="currentColor" class="down-arrow"><path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-4.75-4.75a.75.75 0 011.06-1.06L12 14.94l4.22-4.22a.75.75 0 011.06 1.06l-4.75 4.75z" clip-rule="evenodd"></path></svg></button>
+                </div>
+                <div class="sort-by-dropdown">
+                    <button class="sort-by-button">Sort by <svg viewBox="0 0 24 24" fill="currentColor" class="down-arrow"><path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 01-1.06 0l-4.75-4.75a.75.75 0 011.06-1.06L12 14.94l4.22-4.22a.75.75 0 011.06 1.06l-4.75 4.75z" clip-rule="evenodd"></path></svg></button>
+                </div>
+            </div>
+
         <div class="deals-container fade-in">
         </div>
         <div class="deal-details-header fade-in" style="display: none;">

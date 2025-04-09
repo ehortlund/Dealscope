@@ -213,21 +213,224 @@ body {
 }
 
 .deals-container {
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 /* Rubrik */
 .deal-section-title {
     margin-top: 200px;
-    font-weight: 500;
-    font-size: 32px;
+    font-weight: 600;
+    font-size: 48px;
     color: var(--medium-white);
-    margin-bottom: 30px;
+    margin-bottom: 16px;
+    margin-left: 55px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 1.3px;
-    text-align: center;
+    text-align: left;
+}
+
+.deals-filter-bar {
+    display: flex; /* Placera elementen i rad */
+    align-items: center; /* Centrera vertikalt */
+    gap: 35px; /* Utrymme mellan filterelementen */
+    margin-bottom: 20px; /* Utrymme under filterbaren */
+    padding: 10px 0; /* Lite vertikal padding */
+    justify-content: left; /* Sprid ut elementen med lika mycket utrymme emellan */
+    margin-left: 55px;
+    margin-right: 55px;
+}
+
+/* Lägg till en extra container runt "Category"-knappen för att centrera den */
+.category-wrapper {
+    flex-grow: 1; /* Låt den ta upp så mycket utrymme som möjligt */
+    display: flex;
+    justify-content: center; /* Centrera innehållet inuti wrappern */
+}
+
+.open-search-container,
+.category-button,
+.sort-by-button {
+    font-family: 'Poppins', sans-serif;
+    padding: 8px 15px;
+    border: 1px solid var(--red); /* Enkel gräns */
+    border-radius: 32px;
+    background-color: transparent;
+    color: var(--soft-white);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex; /* För att centrera text och pil */
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease; /* Smidig övergång */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
+}
+
+.category-button:hover,
+.sort-by-button:hover {
+    background-color: transparent;
+    color: var(--red);
+}
+
+.category-dropdown,
+.sort-by-dropdown {
+    position: relative; /* För att kunna positionera dropdown-menyn absolut */
+}
+
+.category-dropdown .down-arrow,
+.sort-by-dropdown .down-arrow {
+    width: 1em;
+    height: 1em;
+    fill: #555;
+}
+
+/* Placeholder för dropdown-menyer (initialt dolda) */
+.category-dropdown-content,
+.sort-by-dropdown-content {
+    position: absolute;
+    top: 100%; /* Placera under knappen */
+    left: 0;
+    z-index: 10; /* Se till att den är ovanpå annat innehåll */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: none; /* Dölj initialt */
+    min-width: 150px; /* Minsta bredd */
+    padding: 5px 0;
+}
+
+.category-dropdown-content a,
+.sort-by-dropdown-content a {
+    display: block;
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #333;
+}
+
+.category-dropdown-content a:hover,
+.sort-by-dropdown-content a:hover {
+    background-color: #eee;
+}
+
+/* Stilar för sökfält (kommer att visas/döljas med JS) */
+.open.search-input{
+    display: none; /* Dölj initialt */
+    position: relative;
+    border-radius: inherit; /* Ärver border-radius från föräldern */
+
+}
+
+.open-search-container {
+    position: relative; /* Gör containern till en positioneringskontext */
+    display: flex;
+    align-items: center;
+    border-radius: 32px;
+    border-bottom-left-radius: 32px; /* Säkerställ initial rundning */
+    border-bottom-right-radius: 32px; /* Säkerställ initial rundning */
+}
+
+.open-search-input::placeholder {
+    color: var(--soft-white); /* Ändra färg på placeholder-texten om du vill */
+}
+
+.open-search-input {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 450;    background-color: transparent;
+    padding: none;
+    border: none;
+    border-radius: 32px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
+    text-align: left;
+}
+
+.open-search-input:focus {
+    outline: none; /* Ta bort fokusmarkeringen om du vill */
+    color: var(--medium-white); /* Behåll eller ändra textfärg vid fokus */
+    background-color: transparent; /* Gör bakgrunden transparent vid fokus */
+}
+
+.search-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.search-results-dropdown {
+    position: absolute;
+    top: 100%; /* Placera under sökfältet */
+    left: 0;
+    right: 0;
+    background-color: transparent; /* Matchar troligen din bakgrundsfärg */
+    border: 1px solid var(--red); /* Mörkare gräns */
+    border-top-width: 0; /* Ingen övre border på dropdown */
+    border-radius: 0px 0px 32px 32px; /* Lite mer rundade hörn */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Starkare skugga */
+    z-index: 10;
+    display: none;
+    max-height: 250px; /* Öka maxhöjden lite */
+    overflow-y: auto;
+    padding-top: 2px; /* Lägg till lite top padding för att kompensera för avsaknad av border */
+    /* Lägg till max-width baserat på förälderns bredd */
+    max-width: calc(100% - 2px); /* Räkna med gränsen på föräldern */
+    width: auto; /* Låt bredden anpassa sig efter innehållet, men inte mer än max-width */
+    /* Lägg till negativ övre marginal för att "överlappa" */
+}
+
+.search-results-dropdown a {
+    font-family: 'Poppins', sans-serif;
+    display: block;
+    padding: 10px 15px; /* Anpassa padding inuti varje länk */
+    text-decoration: none;
+    color: var(--medium-white); /* Använd din vita textfärg */
+    font-size: 1rem;
+    transition: background-color 0.2s ease-in-out; /* Mjukare hover-effekt */
+}
+
+.search-results-dropdown a:hover {
+    color: var(--red); /* Ändra färg vid hover */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;}
+
+/* Lägg till stil för att indikera kategori och datum om du vill */
+.search-results-dropdown a .deal-category,
+.search-results-dropdown a .deal-date {
+    display: block;
+    font-size: 0.85rem;
+    color: #777;
+    margin-top: 5px;
+}
+
+
+.search-button svg {
+    width: 1.2em;
+    height: 1.2em;
+    fill: #555;
+}
+
+.category-button .down-arrow,
+.sort-by-button .down-arrow {
+    /* ... andra stilar ... */
+    fill: var(--soft-white); /* Sätter den vanliga färgen till lila */
+}
+
+.category-button:hover .down-arrow,
+.sort-by-button:hover .down-arrow {
+    fill: var(--red); /* Ändra till önskad hover-färg (exempel: blå) */
 }
 
 /* Titel och underrubrik */
@@ -246,6 +449,10 @@ body {
     font-size: 24px;
     color: var(--medium-white);
     margin-bottom: 30px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
+    text-align: left;
 }
 
 /* Kortet som innehåller all info om dealen */
@@ -279,6 +486,10 @@ body {
     margin-bottom: 10px;
     font-size: 20px;
     font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
+    text-align: left;
 }
 
 /* Listor inom deal-kortet */
@@ -301,11 +512,17 @@ body {
     font-weight: 400;
     text-underline-offset: 4px; /* Justera värdet efter behov */
     text-decoration-thickness: 1px; /* Justera tjockleken efter behov */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
 }
 
 .deal-example-card a.deal-link:hover {
     color: var(--red);
     font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
 }
 
 .deal-example-card li::marker {
@@ -351,13 +568,13 @@ body {
 /* Detaljsida */
 .deal-details-header {
     text-align: center;
-    margin-top: 200px;
+    margin-top: 100px;
     margin-bottom: 50px;
 }
 
 .deal-section-heading {
     font-size: 24px;
-    font-weight: 550;
+    font-weight: 500;
     color: var(--medium-white);
     margin-bottom: 10px;
     text-rendering: optimizeLegibility;
@@ -371,6 +588,9 @@ body {
     font-weight: 500;
     margin-bottom: 10px;
     color: var(--red);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
 }
 
 .deal-details-header p {
@@ -380,6 +600,9 @@ body {
     margin-left: 300px;
     margin-right: 300px;
     color: var(--medium-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
 }
 
 .deal-details-container {
@@ -398,6 +621,9 @@ body {
     font-weight: 500;
     margin-bottom: 20px;
     color: var(--red);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
 }
 
 .deal-details-container p {
@@ -431,6 +657,9 @@ body {
   .stock-symbol {
     color: var(--green); /* Eller någon annan grön färg du föredrar */
     font-weight: bolder; /* Återställ eventuell fetstil från omgivande text om det behövs */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
 }
 
 /* Footer styling */
