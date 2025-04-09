@@ -112,19 +112,6 @@ const dealScope = {
         }
     },
 
-    handleScrollRotation: function (elementId) {
-        const element = document.getElementById(elementId);
-        if (element) {
-            window.addEventListener('scroll', () => {
-                const scrollPosition = window.scrollY;
-                const rotation = scrollPosition * 0.2;
-                element.style.transform = `rotate(${rotation}deg)`;
-            });
-        } else {
-            console.error(`Kunde inte hitta elementet med ID: ${elementId}.`);
-        }
-    },
-
     handleFadeInAnimations: function (selector) {
         document.addEventListener("DOMContentLoaded", () => {
             const fadeIns = document.querySelectorAll(selector);
@@ -174,18 +161,11 @@ const dealScope = {
                 const searchTerm = event.target.value.toLowerCase();
                 let filteredResults = [];
 
-                if (searchTerm.length > 0 && searchResultsDropdown.style.display === 'block') {
-                    openSearchContainer.style.borderBottomColor = 'transparent';
-                } else {
-                    openSearchContainer.style.borderBottomColor = '';
-                    searchResultsDropdown.style.display = 'none';
-                }
-
                 if (searchTerm.length >= 2) {
                     filteredResults = allDeals.filter(deal =>
                         deal.title.toLowerCase().includes(searchTerm) ||
                         deal.description.toLowerCase().includes(searchTerm)
-                    ).slice(0, 5);
+                    ).slice(0, 2); // Begränsa till max 2 resultat
                 }
 
                 searchResultsDropdown.innerHTML = '';
@@ -197,18 +177,23 @@ const dealScope = {
                         resultLink.addEventListener('click', (e) => {
                             e.preventDefault();
                             openSearchInput.value = result.title;
-                            this.generateDealCards([result], dealsContainer);
+                            this.showDealDetails(result.title); // Navigera till deal-details
                             searchResultsDropdown.style.display = 'none';
                             openSearchContainer.style.borderBottomColor = '';
+                            openSearchContainer.style.borderBottomLeftRadius = '32px';
+                            openSearchContainer.style.borderBottomRightRadius = '32px';
                         });
                         searchResultsDropdown.appendChild(resultLink);
                     });
                     searchResultsDropdown.style.display = 'block';
-                } else if (searchTerm.length >= 2) {
-                    searchResultsDropdown.innerHTML = '<p>No matching deals found.</p>';
-                    searchResultsDropdown.style.display = 'block';
+                    openSearchContainer.style.borderBottomColor = 'transparent';
+                    openSearchContainer.style.borderBottomLeftRadius = '0';
+                    openSearchContainer.style.borderBottomRightRadius = '0';
                 } else {
                     searchResultsDropdown.style.display = 'none';
+                    openSearchContainer.style.borderBottomColor = '';
+                    openSearchContainer.style.borderBottomLeftRadius = '32px';
+                    openSearchContainer.style.borderBottomRightRadius = '32px';
                 }
 
                 const overallFilter = allDeals.filter(deal =>
@@ -222,6 +207,8 @@ const dealScope = {
                 if (!openSearchInput.parentElement.contains(event.target)) {
                     searchResultsDropdown.style.display = 'none';
                     openSearchContainer.style.borderBottomColor = '';
+                    openSearchContainer.style.borderBottomLeftRadius = '32px';
+                    openSearchContainer.style.borderBottomRightRadius = '32px';
                 }
             });
         }

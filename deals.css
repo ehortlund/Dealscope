@@ -213,7 +213,7 @@ body {
 }
 
 .deals-container {
-    margin-top: 70px;
+    margin-top: 85px;
 }
 
 /* Rubrik */
@@ -323,16 +323,17 @@ body {
     display: none; /* Dölj initialt */
     position: relative;
     border-radius: inherit; /* Ärver border-radius från föräldern */
+    color: var(--medium-white);
 
 }
 
 .open-search-container {
-    position: relative; /* Gör containern till en positioneringskontext */
+    position: relative;
     display: flex;
     align-items: center;
-    border-radius: 32px;
-    border-bottom-left-radius: 32px; /* Säkerställ initial rundning */
-    border-bottom-right-radius: 32px; /* Säkerställ initial rundning */
+    border: 1px solid var(--red); /* Behåll gränsen */
+    border-radius: 32px; /* Initialt rundade hörn */
+    transition: border-bottom-color 0.01s ease-in-out, border-bottom-left-radius 0.2s ease-in-out, border-bottom-right-radius 0.2s ease-in-out;
 }
 
 .open-search-input::placeholder {
@@ -350,6 +351,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 1.3px;
     text-align: left;
+    color: var(--soft-white); /* Textfärg */
 }
 
 .open-search-input:focus {
@@ -371,33 +373,38 @@ body {
 
 .search-results-dropdown {
     position: absolute;
-    top: 100%; /* Placera under sökfältet */
-    left: 0;
-    right: 0;
-    background-color: transparent; /* Matchar troligen din bakgrundsfärg */
-    border: 1px solid var(--red); /* Mörkare gräns */
-    border-top-width: 0; /* Ingen övre border på dropdown */
-    border-radius: 0px 0px 32px 32px; /* Lite mer rundade hörn */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Starkare skugga */
-    z-index: 10;
+    top: 100%;
+    left: -1px; /* Expandera 1px åt vänster */
+    right: -1px; /* Expandera 1px åt höger */
+    background-color: transparent;
+    border-left: 1px solid var(--red); /* Vänstergräns */
+    border-right: 1px solid var(--red); /* Högergräns */
+    border-bottom: 1px solid var(--red); /* Bottenräns */
+    border-top: none; /* Ingen övre gräns */
+    border-radius: 0px 0px 32px 32px; /* Raka övre, rundade nedre */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: none;
-    max-height: 250px; /* Öka maxhöjden lite */
+    max-height: 250px;
     overflow-y: auto;
-    padding-top: 2px; /* Lägg till lite top padding för att kompensera för avsaknad av border */
-    /* Lägg till max-width baserat på förälderns bredd */
-    max-width: calc(100% - 2px); /* Räkna med gränsen på föräldern */
-    width: auto; /* Låt bredden anpassa sig efter innehållet, men inte mer än max-width */
-    /* Lägg till negativ övre marginal för att "överlappa" */
+    padding-top: 0;
+    padding-bottom: 5px;
+    margin-top: -1px; /* Kompensera för potentiellt mellanrum */
+    width: auto; /* Låt bredden anpassas */
+    transition: all 0.3s ease; /* Smidig övergång */
 }
 
 .search-results-dropdown a {
     font-family: 'Poppins', sans-serif;
-    display: block;
-    padding: 10px 15px; /* Anpassa padding inuti varje länk */
+    display: block; /* Gör varje länk till ett blockelement */
+    white-space: nowrap; /* Förhindra text från att brytas till nästa rad */
+    overflow: hidden; /* Dölj text som går utanför elementets gränser */
+    text-overflow: ellipsis; /* Visa punkter för avkortad text */    padding: 10px 15px; /* Anpassa padding inuti varje länk */
     text-decoration: none;
     color: var(--medium-white); /* Använd din vita textfärg */
     font-size: 1rem;
     transition: background-color 0.2s ease-in-out; /* Mjukare hover-effekt */
+    z-index: 9999 !important; /* Ett högt värde för att säkerställa att den ligger överst */
+
 }
 
 .search-results-dropdown a:hover {
@@ -466,6 +473,7 @@ body {
     margin-bottom: 20px;
     margin-left: 55px;
     margin-right: 55px;
+    z-index: -1;
 }
 
 /* Texten uppe i högra hörnet */
