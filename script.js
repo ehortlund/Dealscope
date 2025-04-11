@@ -138,7 +138,48 @@ const dealScope = {
         const openSearchContainer = document.querySelector('.open-search-container');
         const searchResultsDropdown = document.querySelector('.search-results-dropdown');
         const dealsContainer = document.querySelector('.deals-container');
+        const body = document.querySelector('body');
         let allDeals = [];
+
+        const overlaps = (rect1, rect2) => {
+            return !(rect1.right < rect2.left ||
+                     rect1.left > rect2.right ||
+                     rect1.bottom < rect2.top ||
+                     rect1.top > rect2.bottom);
+        };
+
+        const updateCardOpacity = () => {
+            if (searchResultsDropdown.style.display === 'block' && dealsContainer) {
+                const dropdownRect = searchResultsDropdown.getBoundingClientRect();
+                const dealCards = dealsContainer.querySelectorAll('.deal-example-card');
+                dealCards.forEach((card, index) => {
+                    const cardRect = card.getBoundingClientRect();
+                    // Ändra bara opaciteten om kortet överlappar och det är det första kortet
+                    if (index === 0 && overlaps(dropdownRect, cardRect)) {
+                        card.style.opacity = '0.1';
+                    } else if (index === 0) {
+                        card.style.opacity = '1'; // Återställ om det inte överlappar (kan hända vid justeringar)
+                    } else {
+                        card.style.opacity = '1'; // Låt andra kort vara opaka
+                    }
+                });
+            } else if (dealsContainer) {
+                const dealCards = dealsContainer.querySelectorAll('.deal-example-card');
+                dealCards.forEach(card => {
+                    card.style.opacity = '1'; // Återställ opaciteten när dropdown är stängd
+                });
+            }
+        };
+
+        const showDropdownSelectiveOpacity = () => {
+            searchResultsDropdown.style.display = 'block';
+            updateCardOpacity();
+        };
+
+        const hideDropdownSelectiveOpacity = () => {
+            searchResultsDropdown.style.display = 'none';
+            updateCardOpacity(); // Återställ opaciteten
+        };
 
         console.log("Hämtar deals.json...");
         fetch("deals.json")
@@ -148,15 +189,34 @@ const dealScope = {
             })
             .then((data) => {
                 console.log("Data:", data);
-                allDeals = data; // Spara alla deals
+                allDeals = data;
                 this.generateDealCards(data, ".deals-container");
                 console.log("generateDealCards anropad");
+                // Uppdatera opaciteten initialt om dropdown skulle vara synlig av någon anledning
+                updateCardOpacity();
             })
             .catch((error) => {
                 console.error("Fel vid hämtning av deals.json:", error);
             });
 
-        if (openSearchInput && dealsContainer && searchResultsDropdown && openSearchContainer) {
+        if (openSearchInput && dealsContainer && searchResultsDropdown && openSearchContainer && body) {
+            openSearchInput.addEventListener('focus', () => {
+                if (openSearchInput.value.length >= 2 && allDeals.filter(deal =>
+                    deal.title.toLowerCase().includes(openSearchInput.value.toLowerCase()) ||
+                    deal.description.toLowerCase().includes(openSearchInput.value.toLowerCase())
+                ).slice(0, 5).length > 0) {
+                    showDropdownSelectiveOpacity();
+                }
+            });
+
+            openSearchInput.addEventListener('blur', () => {
+                setTimeout(() => {
+                    if (!searchResultsDropdown.matches(':hover')) {
+                        hideDropdownSelectiveOpacity();
+                    }
+                }, 150);
+            });
+
             openSearchInput.addEventListener('input', (event) => {
                 const searchTerm = event.target.value.toLowerCase();
                 let filteredResults = [];
@@ -165,7 +225,7 @@ const dealScope = {
                     filteredResults = allDeals.filter(deal =>
                         deal.title.toLowerCase().includes(searchTerm) ||
                         deal.description.toLowerCase().includes(searchTerm)
-                    ).slice(0, 2); // Begränsa till max 2 resultat
+                    ).slice(0, 5);
                 }
 
                 searchResultsDropdown.innerHTML = '';
@@ -177,20 +237,20 @@ const dealScope = {
                         resultLink.addEventListener('click', (e) => {
                             e.preventDefault();
                             openSearchInput.value = result.title;
-                            this.showDealDetails(result.title); // Navigera till deal-details
-                            searchResultsDropdown.style.display = 'none';
+                            this.showDealDetails(result.title);
+                            hideDropdownSelectiveOpacity();
                             openSearchContainer.style.borderBottomColor = '';
                             openSearchContainer.style.borderBottomLeftRadius = '32px';
                             openSearchContainer.style.borderBottomRightRadius = '32px';
                         });
                         searchResultsDropdown.appendChild(resultLink);
                     });
-                    searchResultsDropdown.style.display = 'block';
+                    showDropdownSelectiveOpacity();
                     openSearchContainer.style.borderBottomColor = 'transparent';
                     openSearchContainer.style.borderBottomLeftRadius = '0';
                     openSearchContainer.style.borderBottomRightRadius = '0';
                 } else {
-                    searchResultsDropdown.style.display = 'none';
+                    hideDropdownSelectiveOpacity();
                     openSearchContainer.style.borderBottomColor = '';
                     openSearchContainer.style.borderBottomLeftRadius = '32px';
                     openSearchContainer.style.borderBottomRightRadius = '32px';
@@ -205,7 +265,7 @@ const dealScope = {
 
             document.addEventListener('click', (event) => {
                 if (!openSearchInput.parentElement.contains(event.target)) {
-                    searchResultsDropdown.style.display = 'none';
+                    hideDropdownSelectiveOpacity();
                     openSearchContainer.style.borderBottomColor = '';
                     openSearchContainer.style.borderBottomLeftRadius = '32px';
                     openSearchContainer.style.borderBottomRightRadius = '32px';
@@ -220,10 +280,10 @@ const dealScope = {
                 const dealsContainer = document.querySelector(".deals-container");
                 const dealSectionTitle = document.querySelector(".deal-section-title");
 
-                // Återställ visning
                 dealDetailsHeader.style.display = "none";
                 dealDetailsContainer.style.display = "none";
                 dealsContainer.style.display = "block";
+                updateCardOpacity(); // Återställ opaciteten när man går tillbaka
 
                 if (dealSectionTitle) {
                     dealSectionTitle.style.display = "block";
