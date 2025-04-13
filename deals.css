@@ -32,6 +32,26 @@ html {
 }
 
 
+/* Försäkra oss om att filterbaren är högt upp */
+.deals-filter-bar {
+    z-index: 3000 !important; /* Högre än header och annat */
+    position: relative !important; /* För säkerhets skull */
+}
+
+/* Se till att dropdown-innehållet är ännu högre */
+.category-dropdown-content,
+.sort-by-dropdown-content,
+.search-results-dropdown {
+    z-index: 4000 !important; /* Ännu högre än filterbaren */
+    position: absolute !important; /* För säkerhets skull */
+}
+
+/* Återställ z-index på deal-korten (borde vara standard) */
+.deal-example-card {
+    z-index: auto !important;
+    position: relative !important; /* Behåll relative om du behöver det för annan styling */
+}
+
 /* Grundlayout */
 body {
     overflow-x: hidden;
@@ -250,6 +270,7 @@ body {
     justify-content: center; /* Centrera innehållet inuti wrappern */
 }
 
+/* Gemensamma stilar för knapparna (inkluderar nu category-button) */
 .open-search-container,
 .category-button,
 .sort-by-button {
@@ -265,13 +286,17 @@ body {
     display: flex; /* För att centrera text och pil */
     align-items: center;
     gap: 5px;
-    transition: all 0.3s ease; /* Smidig övergång */
+    transition: border-bottom-color 0.01s ease-in-out, border-bottom-left-radius 0.2s ease-in-out, border-bottom-right-radius 0.2s ease-in-out; /* Liknande transition som open-search */
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 1.3px;
-    z-index: 1000; /* Lägg till ett z-index */
+    z-index: 1000; /* Högt z-index */
+}
 
+.category-button {
+    position: relative;
+    z-index: 1000; /* Högt z-index */
 }
 
 .category-button:hover,
@@ -285,40 +310,64 @@ body {
     position: relative; /* För att kunna positionera dropdown-menyn absolut */
 }
 
+/* Stilar för pilen i category-button (använder nu soft-white som standard) */
 .category-dropdown .down-arrow,
 .sort-by-dropdown .down-arrow {
     width: 1em;
     height: 1em;
-    fill: #555;
+    fill: var(--soft-white); /* Standardfärg */
 }
 
-/* Placeholder för dropdown-menyer (initialt dolda) */
+/* Hover-stil för pilen i category-button */
+.category-button:hover .down-arrow,
+.sort-by-button:hover .down-arrow {
+    fill: var(--red); /* Hoverfärg */
+}
+
+/* Stilar för kategoridropdown-innehållet (liknar search-results-dropdown) */
 .category-dropdown-content,
 .sort-by-dropdown-content {
     position: absolute;
     top: 100%; /* Placera under knappen */
-    left: 0;
-    z-index: 10; /* Se till att den är ovanpå annat innehåll */
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    left: -1px; /* Expandera 1px åt vänster */
+    right: -1px; /* Expandera 1px åt höger */
+    z-index: 2000; /* Se till att den är ovanpå annat innehåll */
+    background-color: transparent; /* Transparent bakgrund */
+    border-left: 1px solid var(--red); /* Vänstergräns */
+    border-right: 1px solid var(--red); /* Högergräns */
+    border-bottom: 1px solid var(--red); /* Bottenräns */
+    border-top: none; /* Ingen övre gräns */
+    border-radius: 0px 0px 32px 32px; /* Raka övre, rundade nedre */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Liknande skugga */
     display: none; /* Dölj initialt */
     min-width: 150px; /* Minsta bredd */
     padding: 5px 0;
+    margin-top: -1px; /* Kompensera för potentiellt mellanrum */
 }
 
+/* Stilar för länkarna i kategoridropdown-innehållet (liknar search-results-dropdown a) */
 .category-dropdown-content a,
 .sort-by-dropdown-content a {
     display: block;
-    padding: 8px 15px;
+    padding: 10px 15px; /* Samma padding */
     text-decoration: none;
-    color: #333;
+    color: var(--medium-white); /* Samma textfärg */
+    font-size: 1rem; /* Samma fontstorlek */
+    font-family: 'Poppins', sans-serif; /* Samma font */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.2s ease-in-out; /* Smidig övergång */
+    letter-spacing: 1.3px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
+/* Hover-stil för länkarna i kategoridropdown-innehållet (liknar search-results-dropdown a:hover) */
 .category-dropdown-content a:hover,
 .sort-by-dropdown-content a:hover {
-    background-color: #eee;
+    background-color: rgba(255, 0, 0, 0.1); /* Subtil röd bakgrund vid hover */
+    color: var(--red); /* Röd text vid hover */
 }
 
 /* Stilar för sökfält (kommer att visas/döljas med JS) */
@@ -396,7 +445,7 @@ body {
     width: auto; /* Låt bredden anpassas */
     transition: all 0.3s ease; /* Smidig övergång */
     ;
-    
+
 }
 
 .search-results-dropdown a {
@@ -431,15 +480,16 @@ body {
     margin-top: 5px;
 }
 
+/* Pilen i category-button (standardfärg) */
 .category-button .down-arrow,
 .sort-by-button .down-arrow {
-    /* ... andra stilar ... */
-    fill: var(--soft-white); /* Sätter den vanliga färgen till lila */
+    fill: var(--soft-white);
 }
 
+/* Pilen i category-button vid hover */
 .category-button:hover .down-arrow,
 .sort-by-button:hover .down-arrow {
-    fill: var(--red); /* Ändra till önskad hover-färg (exempel: blå) */
+    fill: var(--red);
 }
 
 /* Titel och underrubrik */

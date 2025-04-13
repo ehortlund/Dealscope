@@ -141,6 +141,11 @@ const dealScope = {
         const body = document.querySelector('body');
         let allDeals = [];
 
+        const categoryDropdown = document.querySelector('.category-dropdown');
+        const categoryButton = document.querySelector('.category-button');
+        const categoryDropdownContent = document.querySelector('.category-dropdown-content');
+        const categoryButtonText = categoryButton ? categoryButton.firstChild : null;
+
         const overlaps = (rect1, rect2) => {
             return !(rect1.right < rect2.left ||
                      rect1.left > rect2.right ||
@@ -148,37 +153,44 @@ const dealScope = {
                      rect1.top > rect2.bottom);
         };
 
-        const updateCardOpacity = () => {
-            if (searchResultsDropdown.style.display === 'block' && dealsContainer) {
-                const dropdownRect = searchResultsDropdown.getBoundingClientRect();
+        const updateCardOpacity = (isDropdownVisible) => {
+            if (isDropdownVisible && dealsContainer && categoryDropdownContent) {
+                const dropdownRect = categoryDropdownContent.getBoundingClientRect();
                 const dealCards = dealsContainer.querySelectorAll('.deal-example-card');
                 dealCards.forEach((card, index) => {
                     const cardRect = card.getBoundingClientRect();
-                    // Ändra bara opaciteten om kortet överlappar och det är det första kortet
                     if (index === 0 && overlaps(dropdownRect, cardRect)) {
                         card.style.opacity = '0.1';
-                    } else if (index === 0) {
-                        card.style.opacity = '1'; // Återställ om det inte överlappar (kan hända vid justeringar)
                     } else {
-                        card.style.opacity = '1'; // Låt andra kort vara opaka
+                        card.style.opacity = '1';
                     }
                 });
             } else if (dealsContainer) {
                 const dealCards = dealsContainer.querySelectorAll('.deal-example-card');
                 dealCards.forEach(card => {
-                    card.style.opacity = '1'; // Återställ opaciteten när dropdown är stängd
+                    card.style.opacity = '1';
                 });
             }
         };
 
-        const showDropdownSelectiveOpacity = () => {
-            searchResultsDropdown.style.display = 'block';
-            updateCardOpacity();
+        const showCategoryDropdown = () => {
+            if (categoryDropdownContent && categoryButton) {
+                categoryDropdownContent.style.display = 'block';
+                categoryButton.style.borderBottomColor = 'transparent';
+                categoryButton.style.borderBottomLeftRadius = '0';
+                categoryButton.style.borderBottomRightRadius = '0';
+                updateCardOpacity(true);
+            }
         };
 
-        const hideDropdownSelectiveOpacity = () => {
-            searchResultsDropdown.style.display = 'none';
-            updateCardOpacity(); // Återställ opaciteten
+        const hideCategoryDropdown = () => {
+            if (categoryDropdownContent && categoryButton) {
+                categoryDropdownContent.style.display = 'none';
+                categoryButton.style.borderBottomColor = '';
+                categoryButton.style.borderBottomLeftRadius = '32px';
+                categoryButton.style.borderBottomRightRadius = '32px';
+                updateCardOpacity(false);
+            }
         };
 
         console.log("Hämtar deals.json...");
@@ -192,8 +204,7 @@ const dealScope = {
                 allDeals = data;
                 this.generateDealCards(data, ".deals-container");
                 console.log("generateDealCards anropad");
-                // Uppdatera opaciteten initialt om dropdown skulle vara synlig av någon anledning
-                updateCardOpacity();
+                updateCardOpacity(false); // Säkerställ initial opacitet
             })
             .catch((error) => {
                 console.error("Fel vid hämtning av deals.json:", error);
@@ -205,14 +216,31 @@ const dealScope = {
                     deal.title.toLowerCase().includes(openSearchInput.value.toLowerCase()) ||
                     deal.description.toLowerCase().includes(openSearchInput.value.toLowerCase())
                 ).slice(0, 5).length > 0) {
-                    showDropdownSelectiveOpacity();
+                    searchResultsDropdown.style.display = 'block';
+                    openSearchContainer.style.borderBottomColor = 'transparent';
+                    openSearchContainer.style.borderBottomLeftRadius = '0';
+                    openSearchContainer.style.borderBottomRightRadius = '0';
+                    const dropdownRect = searchResultsDropdown.getBoundingClientRect();
+                    const dealCards = dealsContainer.querySelectorAll('.deal-example-card');
+                    dealCards.forEach((card, index) => {
+                        const cardRect = card.getBoundingClientRect();
+                        if (index === 0 && overlaps(dropdownRect, cardRect)) {
+                            card.style.opacity = '0.1';
+                        } else {
+                            card.style.opacity = '1';
+                        }
+                    });
                 }
             });
 
             openSearchInput.addEventListener('blur', () => {
                 setTimeout(() => {
                     if (!searchResultsDropdown.matches(':hover')) {
-                        hideDropdownSelectiveOpacity();
+                        searchResultsDropdown.style.display = 'none';
+                        openSearchContainer.style.borderBottomColor = '';
+                        openSearchContainer.style.borderBottomLeftRadius = '32px';
+                        openSearchContainer.style.borderBottomRightRadius = '32px';
+                        updateCardOpacity(false);
                     }
                 }, 150);
             });
@@ -238,22 +266,34 @@ const dealScope = {
                             e.preventDefault();
                             openSearchInput.value = result.title;
                             this.showDealDetails(result.title);
-                            hideDropdownSelectiveOpacity();
+                            searchResultsDropdown.style.display = 'none';
                             openSearchContainer.style.borderBottomColor = '';
                             openSearchContainer.style.borderBottomLeftRadius = '32px';
                             openSearchContainer.style.borderBottomRightRadius = '32px';
+                            updateCardOpacity(false);
                         });
                         searchResultsDropdown.appendChild(resultLink);
                     });
-                    showDropdownSelectiveOpacity();
+                    searchResultsDropdown.style.display = 'block';
                     openSearchContainer.style.borderBottomColor = 'transparent';
                     openSearchContainer.style.borderBottomLeftRadius = '0';
                     openSearchContainer.style.borderBottomRightRadius = '0';
+                    const dropdownRect = searchResultsDropdown.getBoundingClientRect();
+                    const dealCards = dealsContainer.querySelectorAll('.deal-example-card');
+                    dealCards.forEach((card, index) => {
+                        const cardRect = card.getBoundingClientRect();
+                        if (index === 0 && overlaps(dropdownRect, cardRect)) {
+                            card.style.opacity = '0.1';
+                        } else {
+                            card.style.opacity = '1';
+                        }
+                    });
                 } else {
-                    hideDropdownSelectiveOpacity();
+                    searchResultsDropdown.style.display = 'none';
                     openSearchContainer.style.borderBottomColor = '';
                     openSearchContainer.style.borderBottomLeftRadius = '32px';
                     openSearchContainer.style.borderBottomRightRadius = '32px';
+                    updateCardOpacity(false);
                 }
 
                 const overallFilter = allDeals.filter(deal =>
@@ -265,31 +305,73 @@ const dealScope = {
 
             document.addEventListener('click', (event) => {
                 if (!openSearchInput.parentElement.contains(event.target)) {
-                    hideDropdownSelectiveOpacity();
+                    searchResultsDropdown.style.display = 'none';
                     openSearchContainer.style.borderBottomColor = '';
                     openSearchContainer.style.borderBottomLeftRadius = '32px';
                     openSearchContainer.style.borderBottomRightRadius = '32px';
+                    updateCardOpacity(false);
+                }
+                if (categoryDropdown && !categoryDropdown.contains(event.target)) {
+                    hideCategoryDropdown();
+                }
+            });
+        }
+
+        if (categoryButton && categoryDropdownContent) {
+            categoryButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                categoryDropdownContent.style.display = categoryDropdownContent.style.display === 'block' ? 'none' : 'block';
+                if (categoryDropdownContent.style.display === 'block') {
+                    categoryButton.style.borderBottomColor = 'transparent';
+                    categoryButton.style.borderBottomLeftRadius = '0';
+                    categoryButton.style.borderBottomRightRadius = '0';
+                    updateCardOpacity(true);
+                } else {
+                    categoryButton.style.borderBottomColor = '';
+                    categoryButton.style.borderBottomLeftRadius = '32px';
+                    categoryButton.style.borderBottomRightRadius = '32px';
+                    updateCardOpacity(false);
+                }
+            });
+
+            categoryDropdownContent.addEventListener('click', (event) => {
+                if (event.target.tagName === 'A') {
+                    event.preventDefault();
+                    const selectedCategory = event.target.getAttribute('data-category');
+                    if (categoryButtonText) {
+                        categoryButtonText.textContent = event.target.textContent;
+                    }
+                    hideCategoryDropdown();
+
+                    if (selectedCategory === 'all') {
+                        dealScope.generateDealCards(allDeals, '.deals-container');
+                    } else {
+                        const filteredDeals = allDeals.filter(deal => deal.category && deal.category.toLowerCase() === selectedCategory);
+                        dealScope.generateDealCards(filteredDeals, '.deals-container');
+                    }
                 }
             });
         }
 
         const dealDetailsContainer = document.querySelector(".deal-details-container");
-        dealDetailsContainer.addEventListener("click", (event) => {
-            if (event.target.classList.contains("back-button")) {
-                const dealDetailsHeader = document.querySelector(".deal-details-header");
-                const dealsContainer = document.querySelector(".deals-container");
-                const dealSectionTitle = document.querySelector(".deal-section-title");
+        if (dealDetailsContainer) {
+            dealDetailsContainer.addEventListener("click", (event) => {
+                if (event.target.classList.contains("back-button")) {
+                    const dealDetailsHeader = document.querySelector(".deal-details-header");
+                    const dealsContainer = document.querySelector(".deals-container");
+                    const dealSectionTitle = document.querySelector(".deal-section-title");
 
-                dealDetailsHeader.style.display = "none";
-                dealDetailsContainer.style.display = "none";
-                dealsContainer.style.display = "block";
-                updateCardOpacity(); // Återställ opaciteten när man går tillbaka
+                    if (dealDetailsHeader) dealDetailsHeader.style.display = "none";
+                    dealDetailsContainer.style.display = "none";
+                    if (dealsContainer) dealsContainer.style.display = "block";
+                    updateCardOpacity(false);
 
-                if (dealSectionTitle) {
-                    dealSectionTitle.style.display = "block";
+                    if (dealSectionTitle) {
+                        dealSectionTitle.style.display = "block";
+                    }
                 }
-            }
-        });
+            });
+        }
     },
 };
 
