@@ -138,6 +138,7 @@ const dealScope = {
         const openSearchContainer = document.querySelector('.open-search-container');
         const searchResultsDropdown = document.querySelector('.search-results-dropdown');
         const dealsContainer = document.querySelector('.deals-container');
+        const firstDealCard = document.querySelector('.deal-example-card');
         const body = document.querySelector('body');
         let allDeals = [];
 
@@ -240,7 +241,7 @@ const dealScope = {
                         openSearchContainer.style.borderBottomColor = '';
                         openSearchContainer.style.borderBottomLeftRadius = '32px';
                         openSearchContainer.style.borderBottomRightRadius = '32px';
-                        updateCardOpacity(false);
+                        updateCardOpacity(categoryDropdownContent.style.display === 'block');
                     }
                 }, 150);
             });
@@ -270,7 +271,7 @@ const dealScope = {
                             openSearchContainer.style.borderBottomColor = '';
                             openSearchContainer.style.borderBottomLeftRadius = '32px';
                             openSearchContainer.style.borderBottomRightRadius = '32px';
-                            updateCardOpacity(false);
+                            updateCardOpacity(categoryDropdownContent.style.display === 'block');
                         });
                         searchResultsDropdown.appendChild(resultLink);
                     });
@@ -293,7 +294,7 @@ const dealScope = {
                     openSearchContainer.style.borderBottomColor = '';
                     openSearchContainer.style.borderBottomLeftRadius = '32px';
                     openSearchContainer.style.borderBottomRightRadius = '32px';
-                    updateCardOpacity(false);
+                    updateCardOpacity(categoryDropdownContent.style.display === 'block');
                 }
 
                 const overallFilter = allDeals.filter(deal =>
@@ -309,7 +310,7 @@ const dealScope = {
                     openSearchContainer.style.borderBottomColor = '';
                     openSearchContainer.style.borderBottomLeftRadius = '32px';
                     openSearchContainer.style.borderBottomRightRadius = '32px';
-                    updateCardOpacity(false);
+                    updateCardOpacity(categoryDropdownContent.style.display === 'block');
                 }
                 if (categoryDropdown && !categoryDropdown.contains(event.target)) {
                     hideCategoryDropdown();
@@ -320,18 +321,12 @@ const dealScope = {
         if (categoryButton && categoryDropdownContent) {
             categoryButton.addEventListener('click', (event) => {
                 event.stopPropagation();
-                categoryDropdownContent.style.display = categoryDropdownContent.style.display === 'block' ? 'none' : 'block';
-                if (categoryDropdownContent.style.display === 'block') {
-                    categoryButton.style.borderBottomColor = 'transparent';
-                    categoryButton.style.borderBottomLeftRadius = '0';
-                    categoryButton.style.borderBottomRightRadius = '0';
-                    updateCardOpacity(true);
-                } else {
-                    categoryButton.style.borderBottomColor = '';
-                    categoryButton.style.borderBottomLeftRadius = '32px';
-                    categoryButton.style.borderBottomRightRadius = '32px';
-                    updateCardOpacity(false);
-                }
+                const isVisible = categoryDropdownContent.style.display === 'block';
+                categoryDropdownContent.style.display = isVisible ? 'none' : 'block';
+                categoryButton.style.borderBottomColor = isVisible ? '' : 'transparent';
+                categoryButton.style.borderBottomLeftRadius = isVisible ? '32px' : '0';
+                categoryButton.style.borderBottomRightRadius = isVisible ? '32px' : '0';
+                updateCardOpacity(!isVisible); // Sänk opaciteten om den inte är synlig (ska visas)
             });
 
             categoryDropdownContent.addEventListener('click', (event) => {
@@ -342,7 +337,7 @@ const dealScope = {
                         categoryButtonText.textContent = event.target.textContent;
                     }
                     hideCategoryDropdown();
-
+                    updateCardOpacity(false); // Återställ opaciteten när en kategori väljs
                     if (selectedCategory === 'all') {
                         dealScope.generateDealCards(allDeals, '.deals-container');
                     } else {

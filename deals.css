@@ -353,6 +353,7 @@ body {
     text-decoration: none;
     color: var(--medium-white); /* Samma textfärg */
     font-size: 1rem; /* Samma fontstorlek */
+    font-weight: 500;
     font-family: 'Poppins', sans-serif; /* Samma font */
     white-space: nowrap;
     overflow: hidden;
@@ -464,6 +465,7 @@ body {
 }
 
 .search-results-dropdown a:hover {
+    background-color: rgba(255, 0, 0, 0.1); /* Subtil röd bakgrund vid hover */
     color: var(--red); /* Ändra färg vid hover */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
