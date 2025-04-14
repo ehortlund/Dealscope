@@ -325,12 +325,9 @@ body {
 }
 
 /* Stilar för kategoridropdown-innehållet (liknar search-results-dropdown) */
-.category-dropdown-content,
-.sort-by-dropdown-content {
+.category-dropdown-content{
     position: absolute;
-    top: 100%; /* Placera under knappen */
-    left: -1px; /* Expandera 1px åt vänster */
-    right: -1px; /* Expandera 1px åt höger */
+    top: 100%; /* Placera under knappen */;
     z-index: 2000; /* Se till att den är ovanpå annat innehåll */
     background-color: transparent; /* Transparent bakgrund */
     border-left: 1px solid var(--red); /* Vänstergräns */
@@ -343,6 +340,10 @@ body {
     min-width: 150px; /* Minsta bredd */
     padding: 5px 0;
     margin-top: -1px; /* Kompensera för potentiellt mellanrum */
+}
+
+.down-arrow {
+    padding-right: 13px;
 }
 
 /* Stilar för länkarna i kategoridropdown-innehållet (liknar search-results-dropdown a) */
