@@ -495,6 +495,25 @@ body {
     fill: var(--red);
 }
 
+.sort-by-dropdown-content {
+    position: absolute;
+    top: 100%; /* Placera under knappen */
+    left: -1px; /* Expandera 1px åt vänster */
+    right: -1px; /* Expandera 1px åt höger */
+    z-index: 2000; /* Se till att den är ovanpå annat innehåll */
+    background-color: transparent; /* Transparent bakgrund */
+    border-left: 1px solid var(--red); /* Vänstergräns */
+    border-right: 1px solid var(--red); /* Högergräns */
+    border-bottom: 1px solid var(--red); /* Bottenräns */
+    border-top: none; /* Ingen övre gräns */
+    border-radius: 0px 0px 32px 32px; /* Raka övre, rundade nedre */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Liknande skugga */
+    display: none; /* Dölj initialt */
+    min-width: 150px; /* Minsta bredd */
+    padding: 5px 0;
+    margin-top: -1px; /* Kompensera för potentiellt mellanrum */
+}
+
 /* Titel och underrubrik */
 .deal-example-title {
     font-weight: 600;

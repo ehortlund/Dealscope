@@ -11,6 +11,7 @@ const dealScope = {
             '<ul class="deal-details">' +
             '<li>Category: ' + deal.category + '</li>' +
             '<li>Date: ' + deal.date + '</li>' +
+            (deal.dealValue ? '<li>Deal Value: ' + deal.dealValue + '</li>' : '') +
             '</ul>' +
             '<button class="deal-link-button" data-link="' + deal.link + '">Read More</button>' +
             '</article>';
@@ -129,7 +130,36 @@ const dealScope = {
         });
     },
 
-    init: async function () {
+    sortDeals: function (deals, sortBy) {
+        let sortedDeals = [...deals]; // Skapa en kopia för att inte ändra originalet
+
+        switch (sortBy) {
+            case 'date-latest':
+                sortedDeals.sort((a, b) => new Date(b.date) - new Date(a.date));
+                break;
+            case 'dealValue-highest':
+                sortedDeals.sort((a, b) => {
+                    const valueA = parseFloat(a.dealValue ? a.dealValue.replace(/[^0-9.-]+/g, '') : -Infinity);
+                    const valueB = parseFloat(b.dealValue ? b.dealValue.replace(/[^0-9.-]+/g, '') : -Infinity);
+                    return valueB - valueA;
+                });
+                break;
+            case 'dealValue-lowest':
+                sortedDeals.sort((a, b) => {
+                    const valueA = parseFloat(a.dealValue ? a.dealValue.replace(/[^0-9.-]+/g, '') : Infinity);
+                    const valueB = parseFloat(b.dealValue ? b.dealValue.replace(/[^0-9.-]+/g, '') : Infinity);
+                    return valueA - valueB;
+                });
+                break;
+            default:
+                // Ingen sortering eller standard
+                break;
+        }
+        return sortedDeals;
+    },
+
+
+   init: async function () {
         console.log("DealScope JavaScript is running!");
         this.handleMobileNav();
         this.handleFadeInAnimations('.fade-in');
@@ -138,14 +168,18 @@ const dealScope = {
         const openSearchContainer = document.querySelector('.open-search-container');
         const searchResultsDropdown = document.querySelector('.search-results-dropdown');
         const dealsContainer = document.querySelector('.deals-container');
-        const firstDealCard = document.querySelector('.deal-example-card');
         const body = document.querySelector('body');
         let allDeals = [];
+        let currentDeals = []; // För att hålla reda på de deals som visas (kan vara filtrerade)
 
         const categoryDropdown = document.querySelector('.category-dropdown');
         const categoryButton = document.querySelector('.category-button');
         const categoryDropdownContent = document.querySelector('.category-dropdown-content');
         const categoryButtonText = categoryButton ? categoryButton.firstChild : null;
+
+        const sortByDropdown = document.querySelector('.sort-by-dropdown');
+        const sortByButton = document.querySelector('.sort-by-button');
+        const sortByDropdownContent = document.querySelector('.sort-by-dropdown-content');
 
         const overlaps = (rect1, rect2) => {
             return !(rect1.right < rect2.left ||
@@ -155,12 +189,12 @@ const dealScope = {
         };
 
         const updateCardOpacity = (isDropdownVisible) => {
-            if (isDropdownVisible && dealsContainer && categoryDropdownContent) {
-                const dropdownRect = categoryDropdownContent.getBoundingClientRect();
+            if (isDropdownVisible && dealsContainer && (categoryDropdownContent.style.display === 'block' || sortByDropdownContent.style.display === 'block')) {
+                const activeDropdownRect = categoryDropdownContent.style.display === 'block' ? categoryDropdownContent.getBoundingClientRect() : sortByDropdownContent.getBoundingClientRect();
                 const dealCards = dealsContainer.querySelectorAll('.deal-example-card');
                 dealCards.forEach((card, index) => {
                     const cardRect = card.getBoundingClientRect();
-                    if (index === 0 && overlaps(dropdownRect, cardRect)) {
+                    if (index === 0 && overlaps(activeDropdownRect, cardRect)) {
                         card.style.opacity = '0.1';
                     } else {
                         card.style.opacity = '1';
@@ -194,6 +228,26 @@ const dealScope = {
             }
         };
 
+        const showSortByDropdown = () => {
+            if (sortByDropdownContent && sortByButton) {
+                sortByDropdownContent.style.display = 'block';
+                sortByButton.style.borderBottomColor = 'transparent';
+                sortByButton.style.borderBottomLeftRadius = '0';
+                sortByButton.style.borderBottomRightRadius = '0';
+                updateCardOpacity(true);
+            }
+        };
+
+        const hideSortByDropdown = () => {
+            if (sortByDropdownContent && sortByButton) {
+                sortByDropdownContent.style.display = 'none';
+                sortByButton.style.borderBottomColor = '';
+                sortByButton.style.borderBottomLeftRadius = '32px';
+                sortByButton.style.borderBottomRightRadius = '32px';
+                updateCardOpacity(false);
+            }
+        };
+
         console.log("Hämtar deals.json...");
         fetch("deals.json")
             .then((response) => {
@@ -203,7 +257,8 @@ const dealScope = {
             .then((data) => {
                 console.log("Data:", data);
                 allDeals = data;
-                this.generateDealCards(data, ".deals-container");
+                currentDeals = [...allDeals]; // Initialt visas alla deals
+                this.generateDealCards(currentDeals, ".deals-container"); // Använd currentDeals
                 console.log("generateDealCards anropad");
                 updateCardOpacity(false); // Säkerställ initial opacitet
             })
@@ -241,21 +296,17 @@ const dealScope = {
                         openSearchContainer.style.borderBottomColor = '';
                         openSearchContainer.style.borderBottomLeftRadius = '32px';
                         openSearchContainer.style.borderBottomRightRadius = '32px';
-                        updateCardOpacity(categoryDropdownContent.style.display === 'block');
+                        updateCardOpacity(categoryDropdownContent.style.display === 'block' || sortByDropdownContent.style.display === 'block');
                     }
                 }, 150);
             });
 
             openSearchInput.addEventListener('input', (event) => {
                 const searchTerm = event.target.value.toLowerCase();
-                let filteredResults = [];
-
-                if (searchTerm.length >= 2) {
-                    filteredResults = allDeals.filter(deal =>
-                        deal.title.toLowerCase().includes(searchTerm) ||
-                        deal.description.toLowerCase().includes(searchTerm)
-                    ).slice(0, 5);
-                }
+                const filteredResults = allDeals.filter(deal =>
+                    deal.title.toLowerCase().includes(searchTerm) ||
+                    deal.description.toLowerCase().includes(searchTerm)
+                ).slice(0, 5);
 
                 searchResultsDropdown.innerHTML = '';
                 if (filteredResults.length > 0) {
@@ -271,7 +322,7 @@ const dealScope = {
                             openSearchContainer.style.borderBottomColor = '';
                             openSearchContainer.style.borderBottomLeftRadius = '32px';
                             openSearchContainer.style.borderBottomRightRadius = '32px';
-                            updateCardOpacity(categoryDropdownContent.style.display === 'block');
+                            updateCardOpacity(categoryDropdownContent.style.display === 'block' || sortByDropdownContent.style.display === 'block');
                         });
                         searchResultsDropdown.appendChild(resultLink);
                     });
@@ -294,14 +345,15 @@ const dealScope = {
                     openSearchContainer.style.borderBottomColor = '';
                     openSearchContainer.style.borderBottomLeftRadius = '32px';
                     openSearchContainer.style.borderBottomRightRadius = '32px';
-                    updateCardOpacity(categoryDropdownContent.style.display === 'block');
+                    updateCardOpacity(categoryDropdownContent.style.display === 'block' || sortByDropdownContent.style.display === 'block');
                 }
 
                 const overallFilter = allDeals.filter(deal =>
                     deal.title.toLowerCase().includes(searchTerm) ||
                     deal.description.toLowerCase().includes(searchTerm)
                 );
-                this.generateDealCards(overallFilter, dealsContainer);
+                currentDeals = overallFilter;
+                this.generateDealCards(currentDeals, dealsContainer);
             });
 
             document.addEventListener('click', (event) => {
@@ -310,23 +362,27 @@ const dealScope = {
                     openSearchContainer.style.borderBottomColor = '';
                     openSearchContainer.style.borderBottomLeftRadius = '32px';
                     openSearchContainer.style.borderBottomRightRadius = '32px';
-                    updateCardOpacity(categoryDropdownContent.style.display === 'block');
+                    updateCardOpacity(categoryDropdownContent.style.display === 'block' || sortByDropdownContent.style.display === 'block');
                 }
                 if (categoryDropdown && !categoryDropdown.contains(event.target)) {
                     hideCategoryDropdown();
                 }
+                if (sortByDropdown && !sortByDropdown.contains(event.target)) {
+                    hideSortByDropdown();
+                }
             });
         }
 
-        if (categoryButton && categoryDropdownContent) {
+        if (categoryButton && categoryDropdownContent && categoryDropdown) {
             categoryButton.addEventListener('click', (event) => {
                 event.stopPropagation();
                 const isVisible = categoryDropdownContent.style.display === 'block';
                 categoryDropdownContent.style.display = isVisible ? 'none' : 'block';
-                categoryButton.style.borderBottomColor = isVisible ? '' : 'transparent';
-                categoryButton.style.borderBottomLeftRadius = isVisible ? '32px' : '0';
-                categoryButton.style.borderBottomRightRadius = isVisible ? '32px' : '0';
-                updateCardOpacity(!isVisible); // Sänk opaciteten om den inte är synlig (ska visas)
+                categoryDropdown.classList.toggle('open', !isVisible);
+                updateCardOpacity(!isVisible);
+                if (sortByDropdownContent && sortByDropdownContent.style.display === 'block') {
+                    hideSortByDropdown();
+                }
             });
 
             categoryDropdownContent.addEventListener('click', (event) => {
@@ -337,13 +393,32 @@ const dealScope = {
                         categoryButtonText.textContent = event.target.textContent;
                     }
                     hideCategoryDropdown();
-                    updateCardOpacity(false); // Återställ opaciteten när en kategori väljs
-                    if (selectedCategory === 'all') {
-                        dealScope.generateDealCards(allDeals, '.deals-container');
-                    } else {
-                        const filteredDeals = allDeals.filter(deal => deal.category && deal.category.toLowerCase() === selectedCategory);
-                        dealScope.generateDealCards(filteredDeals, '.deals-container');
-                    }
+                    let filteredByCategory = selectedCategory === 'all' ? allDeals : allDeals.filter(deal => deal.category && deal.category.toLowerCase() === selectedCategory);
+                    currentDeals = filteredByCategory;
+                    this.generateDealCards(currentDeals, '.deals-container');
+                }
+            });
+        }
+
+        if (sortByButton && sortByDropdownContent && sortByDropdown) {
+            sortByButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const isVisible = sortByDropdownContent.style.display === 'block';
+                sortByDropdownContent.style.display = isVisible ? 'none' : 'block';
+                sortByDropdown.classList.toggle('open', !isVisible);
+                updateCardOpacity(!isVisible);
+                if (categoryDropdownContent && categoryDropdownContent.style.display === 'block') {
+                    hideCategoryDropdown();
+                }
+            });
+
+            sortByDropdownContent.addEventListener('click', (event) => {
+                if (event.target.tagName === 'A') {
+                    event.preventDefault();
+                    const sortByValue = event.target.getAttribute('data-sort');
+                    hideSortByDropdown();
+                    currentDeals = this.sortDeals(currentDeals, sortByValue);
+                    this.generateDealCards(currentDeals, '.deals-container');
                 }
             });
         }
