@@ -23,7 +23,7 @@ const dealScope = {
         if (dealsContainer) {
             dealsContainer.innerHTML = '';
             if (deals.length === 0) {
-                dealsContainer.innerHTML = '<p>No deals found matching your search.</p>';
+                dealsContainer.innerHTML = '<p class="no-deals-message">No deals found matching your search :(</p>';
                 return;
             }
             deals.forEach(deal => {
