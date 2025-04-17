@@ -233,7 +233,14 @@ body {
 }
 
 .deals-container {
+    flex-direction: column;
     margin-top: 55px;
+}
+
+.deal-section {
+    display: flex;
+    flex-direction: column;
+
 }
 
 /* Rubrik */
@@ -261,6 +268,7 @@ body {
     justify-content: left; /* Sprid ut elementen med lika mycket utrymme emellan */
     margin-left: 55px;
     margin-right: 55px;
+
 }
 
 /* Lägg till en extra container runt "Category"-knappen för att centrera den */
@@ -270,10 +278,13 @@ body {
     justify-content: center; /* Centrera innehållet inuti wrappern */
 }
 
+
+
 /* Gemensamma stilar för knapparna (inkluderar nu category-button) */
 .open-search-container,
 .category-button,
 .sort-by-button {
+    white-space: nowrap;
     font-family: 'Poppins', sans-serif;
     padding: 8px 15px;
     border: 1px solid var(--red); /* Enkel gräns */
@@ -317,6 +328,8 @@ body {
     height: 1em;
     fill: var(--soft-white); /* Standardfärg */
 }
+
+
 
 /* Hover-stil för pilen i category-button */
 .category-button:hover .down-arrow,
@@ -495,11 +508,15 @@ body {
     fill: var(--red);
 }
 
+.sort-by-button .down-arrow {
+    padding-right: 38px;
+}
+
 .sort-by-dropdown-content {
     position: absolute;
     top: 100%; /* Placera under knappen */
-    left: -1px; /* Expandera 1px åt vänster */
-    right: -1px; /* Expandera 1px åt höger */
+    left: 0; /* Expandera 1px åt vänster */
+    right: 0; /* Expandera 1px åt höger */
     z-index: 2000; /* Se till att den är ovanpå annat innehåll */
     background-color: transparent; /* Transparent bakgrund */
     border-left: 1px solid var(--red); /* Vänstergräns */

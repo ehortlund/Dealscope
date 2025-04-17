@@ -383,6 +383,17 @@ const dealScope = {
                 if (sortByDropdownContent && sortByDropdownContent.style.display === 'block') {
                     hideSortByDropdown();
                 }
+
+                // Hantera den undre gränsen direkt i JavaScript
+                if (isVisible) {
+                    categoryButton.style.borderBottomColor = '';
+                    categoryButton.style.borderBottomLeftRadius = '32px';
+                    categoryButton.style.borderBottomRightRadius = '32px';
+                } else {
+                    categoryButton.style.borderBottomColor = 'transparent';
+                    categoryButton.style.borderBottomLeftRadius = '0';
+                    categoryButton.style.borderBottomRightRadius = '0';
+                }
             });
 
             categoryDropdownContent.addEventListener('click', (event) => {
@@ -396,6 +407,11 @@ const dealScope = {
                     let filteredByCategory = selectedCategory === 'all' ? allDeals : allDeals.filter(deal => deal.category && deal.category.toLowerCase() === selectedCategory);
                     currentDeals = filteredByCategory;
                     this.generateDealCards(currentDeals, '.deals-container');
+
+                    // Återställ gränsen när ett val görs och dropdown stängs (för säkerhets skull)
+                    categoryButton.style.borderBottomColor = '';
+                    categoryButton.style.borderBottomLeftRadius = '32px';
+                    categoryButton.style.borderBottomRightRadius = '32px';
                 }
             });
         }
@@ -410,6 +426,17 @@ const dealScope = {
                 if (categoryDropdownContent && categoryDropdownContent.style.display === 'block') {
                     hideCategoryDropdown();
                 }
+
+                // Hantera den undre gränsen direkt i JavaScript
+                if (isVisible) {
+                    sortByButton.style.borderBottomColor = '';
+                    sortByButton.style.borderBottomLeftRadius = '32px';
+                    sortByButton.style.borderBottomRightRadius = '32px';
+                } else {
+                    sortByButton.style.borderBottomColor = 'transparent';
+                    sortByButton.style.borderBottomLeftRadius = '0';
+                    sortByButton.style.borderBottomRightRadius = '0';
+                }
             });
 
             sortByDropdownContent.addEventListener('click', (event) => {
@@ -419,6 +446,11 @@ const dealScope = {
                     hideSortByDropdown();
                     currentDeals = this.sortDeals(currentDeals, sortByValue);
                     this.generateDealCards(currentDeals, '.deals-container');
+
+                    // Återställ gränsen när ett val görs och dropdown stängs (för säkerhets skull)
+                    sortByButton.style.borderBottomColor = '';
+                    sortByButton.style.borderBottomLeftRadius = '32px';
+                    sortByButton.style.borderBottomRightRadius = '32px';
                 }
             });
         }
