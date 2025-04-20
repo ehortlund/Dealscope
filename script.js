@@ -61,6 +61,8 @@ const dealScope = {
                     const dealDetailsContainer = document.querySelector(".deal-details-container");
                     const dealsContainer = document.querySelector(".deals-container");
                     const dealSectionTitle = document.querySelector(".deal-section-title");
+                    const dealsFilterBar = document.querySelector(".deals-filter-bar"); // Hämta referensen till filterbaren
+                    if (dealsFilterBar) dealsFilterBar.style.display = "none"; // Dölj filterbaren
 
                     dealDetailsHeader.innerHTML = `<h2>${deal.title}</h2><p>${deal.description}</p>`;
                     dealDetailsContainer.innerHTML = this.generateDealDetails(deal);
@@ -462,6 +464,8 @@ const dealScope = {
                     const dealDetailsHeader = document.querySelector(".deal-details-header");
                     const dealsContainer = document.querySelector(".deals-container");
                     const dealSectionTitle = document.querySelector(".deal-section-title");
+                    const dealsFilterBar = document.querySelector(".deals-filter-bar"); // Hämta referensen till filterbaren
+                    if (dealsFilterBar) dealsFilterBar.style.display = "flex"; // Visa filterbaren igen (anpassa till din CSS om det inte är flex)
 
                     if (dealDetailsHeader) dealDetailsHeader.style.display = "none";
                     dealDetailsContainer.style.display = "none";

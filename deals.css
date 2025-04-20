@@ -280,6 +280,18 @@ body {
 
 }
 
+/* Dölj filterbaren när deal-detaljer visas */
+.deal-details-header[style*="display: block"] + .deals-filter-bar,
+.deal-details-container[style*="display: block"] + .deals-filter-bar {
+    display: none !important;
+}
+
+/* Visa filterbaren när deal-detaljer är dolda (för säkerhets skull) */
+.deal-details-header:not([style*="display: block"]) + .deals-filter-bar,
+.deal-details-container:not([style*="display: block"]) + .deals-filter-bar {
+    display: flex !important; /* Återställ till flex om den var det */
+}
+
 /* Lägg till en extra container runt "Category"-knappen för att centrera den */
 .category-wrapper {
     flex-grow: 1; /* Låt den ta upp så mycket utrymme som möjligt */
