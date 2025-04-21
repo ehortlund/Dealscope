@@ -880,6 +880,24 @@ body {
 
 /* Responsiv anpassning */
 @media (max-width: 768px) {
+
+    body {
+        /* ... andra body-stilar ... */
+        overflow-x: hidden; /* Förhindrar horisontell scroll */
+    }
+
+    html {
+        overflow-x: hidden; /* Kan behövas för vissa webbläsare */
+    }
+
+    .deal-section-title {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 120px; /* Justera avståndet */
+        font-size: 28px; /* Justera storleken */
+        text-align: center; /* Centrera rubriken */
+    }
+
     .footer-container {
         flex-direction:column; /* Stapla sektionerna vertikalt */
         text-align: center;
@@ -897,7 +915,46 @@ body {
     .deal-section-heading {
         font-size: 16px;
     }
+
+    .deals-filter-bar {
+        display: flex; /* Använd flexbox för horisontell layout */
+        flex-direction: row; /* Säkerställ att elementen ligger i rad */
+        align-items: center; /* Justera vertikal centrering efter behov */
+        overflow-x: auto; /* Aktivera horisontell scrollning vid behov */
+        -webkit-overflow-scrolling: touch; /* För smidig scrollning på iOS */
+        padding: 10px; /* Lägg till lite padding runt om */
+        gap: 10px; /* Avstånd mellan filterelementen */
+        width: 100%; /* Låt filterbaren ta upp hela bredden */
+    }
+
+    /* Anpassa bredden på de enskilda filterelementen (input, select, etc.) */
+    .deals-filter-bar input[type="text"],
+    .deals-filter-bar select,
+    .deals-filter-bar .filter-item { /* Om dina filter ligger i div:ar med klassen .filter-item */
+        width: auto; /* Låt bredden baseras på innehållet */
+        min-width: 150px; /* Sätt en minsta bredd för läsbarhet/användbarhet (justera värdet) */
+        padding: 0;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid transparent;
+        flex-shrink: 0; /* Förhindra att elementen krymper för mycket */
+    }
+    
+    .deals-filter-bar::-webkit-scrollbar {
+        display: none; /* För Chrome, Safari, Opera */
+    }
+
+    /* Om du har en wrapper runt dina filterelement */
+    /* .filter-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    } */
 }
+
 
 /* Mobilanpassning */
 @media (max-width: 768px) {
