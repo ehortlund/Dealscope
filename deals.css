@@ -267,17 +267,44 @@ body {
     text-align: left;
 }
 
-.deals-filter-bar {
-    z-index: 1000;
-    display: flex; /* Placera elementen i rad */
-    align-items: center; /* Centrera vertikalt */
-    gap: 35px; /* Utrymme mellan filterelementen */
-    margin-bottom: 20px; /* Utrymme under filterbaren */
-    padding: 10px 0; /* Lite vertikal padding */
-    justify-content: left; /* Sprid ut elementen med lika mycket utrymme emellan */
-    margin-left: 55px;
-    margin-right: 55px;
+.filter-grid {
+    display: flex;
+    flex-wrap: nowrap; /* Förhindrar radbrytning på desktop */
+    width: 100%;
+    gap: 20px; /* Avstånd mellan filter */
+}
 
+.filter-nav-prev,
+.filter-nav-next {
+    display: block; /* Syns som standard, men styrs av media query */
+    background-color: #f0f0f0;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 5px;
+}
+
+.filter-nav-prev:disabled,
+.filter-nav-next:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (min-width: 769px) {
+    .filter-nav-prev,
+    .filter-nav-next {
+        display: none; /* Dolda på desktop */
+    }
+}
+.deals-filter-bar {
+    margin-left: 55px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1000;
+    overflow: visible; /* Ingen klippning */
+    width: 100%; /* Säkerställer full bredd */
 }
 
 /* Dölj filterbaren när deal-detaljer visas */
@@ -920,12 +947,44 @@ body {
         display: flex; /* Använd flexbox för horisontell layout */
         flex-direction: row; /* Säkerställ att elementen ligger i rad */
         align-items: center; /* Justera vertikal centrering efter behov */
-        overflow-x: auto; /* Aktivera horisontell scrollning vid behov */
+        overflow: visible; /* Ingen klippning av dropdown */
         -webkit-overflow-scrolling: touch; /* För smidig scrollning på iOS */
         padding: 10px; /* Lägg till lite padding runt om */
         gap: 10px; /* Avstånd mellan filterelementen */
         width: 100%; /* Låt filterbaren ta upp hela bredden */
+        margin-left: 0;
     }
+
+    .filter-grid {
+        display: grid;
+        grid-template-columns: 1fr; /* En kolumn för pagination */
+        width: 100%;
+    }
+
+    .filter-item {
+        display: none; /* Döljs initialt, visas av JS */
+    }
+
+    .filter-item:first-child {
+        display: block; /* Visa första elementet initialt */
+    }
+
+    .filter-nav-prev,
+    .filter-nav-next {
+        background-color: #f0f0f0;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 0 5px;
+    }
+
+    .filter-nav-prev:disabled,
+    .filter-nav-next:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
 
     /* Anpassa bredden på de enskilda filterelementen (input, select, etc.) */
     .deals-filter-bar input[type="text"],

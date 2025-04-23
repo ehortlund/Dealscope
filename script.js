@@ -250,6 +250,52 @@ const dealScope = {
             }
         };
 
+        function setupPagination() {
+            const filterGrid = document.querySelector('.filter-grid');
+            const filterItems = document.querySelectorAll('.filter-item');
+            const prevButton = document.querySelector('.filter-nav-prev');
+            const nextButton = document.querySelector('.filter-nav-next');
+            let currentIndex = 0;
+        
+            function showFilterItem(index) {
+                filterItems.forEach((item, i) => {
+                    item.style.display = i === index ? 'block' : 'none';
+                });
+                prevButton.disabled = index === 0;
+                nextButton.disabled = index === filterItems.length - 1;
+            }
+        
+            prevButton.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    showFilterItem(currentIndex);
+                }
+            });
+        
+            nextButton.addEventListener('click', () => {
+                if (currentIndex < filterItems.length - 1) {
+                    currentIndex++;
+                    showFilterItem(currentIndex);
+                }
+            });
+        
+            showFilterItem(currentIndex);
+        }
+        
+        if (window.matchMedia('(max-width: 768px)').matches) {
+            setupPagination();
+        }
+        
+        window.addEventListener('resize', () => {
+            if (window.matchMedia('(max-width: 768px)').matches) {
+                setupPagination();
+            } else {
+                const filterItems = document.querySelectorAll('.filter-item');
+                filterItems.forEach(item => {
+                    item.style.display = 'inline-block'; // Visa alla på desktop
+                });
+            }
+        });
         console.log("Hämtar deals.json...");
         fetch("deals.json")
             .then((response) => {
