@@ -251,49 +251,89 @@ const dealScope = {
         };
 
         function setupPagination() {
-            const filterGrid = document.querySelector('.filter-grid');
             const filterItems = document.querySelectorAll('.filter-item');
-            const prevButton = document.querySelector('.filter-nav-prev');
-            const nextButton = document.querySelector('.filter-nav-next');
             let currentIndex = 0;
         
-            function showFilterItem(index) {
+            function setActiveFilter(index) {
+                console.log(`Byter till filter ${index}`);
                 filterItems.forEach((item, i) => {
-                    item.style.display = i === index ? 'block' : 'none';
+                    item.classList.toggle('active', i === index);
                 });
-                prevButton.disabled = index === 0;
-                nextButton.disabled = index === filterItems.length - 1;
+        
+                // Scrolla till det aktiva filtret för att centrera det (CSS scroll-snap hanterar resten)
+                filterItems[index].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+        
+                currentIndex = index;
             }
         
-            prevButton.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    showFilterItem(currentIndex);
-                }
-            });
-        
-            nextButton.addEventListener('click', () => {
-                if (currentIndex < filterItems.length - 1) {
-                    currentIndex++;
-                    showFilterItem(currentIndex);
-                }
-            });
-        
-            showFilterItem(currentIndex);
-        }
-        
-        if (window.matchMedia('(max-width: 768px)').matches) {
-            setupPagination();
-        }
-        
-        window.addEventListener('resize', () => {
-            if (window.matchMedia('(max-width: 768px)').matches) {
-                setupPagination();
-            } else {
-                const filterItems = document.querySelectorAll('.filter-item');
-                filterItems.forEach(item => {
-                    item.style.display = 'inline-block'; // Visa alla på desktop
+            filterItems.forEach((item, index) => {
+                item.addEventListener('click', (event) => {
+                    console.log(`Klick på filter ${index}, är aktiv: ${item.classList.contains('active')}`);
+                    if (!item.classList.contains('active')) {
+                        setActiveFilter(index);
+                    }
                 });
+        
+                // Hantera klick på barn-element
+                const clickableChildren = item.querySelectorAll('input, button');
+                clickableChildren.forEach(child => {
+                    child.addEventListener('click', (event) => {
+                        console.log(`Klick på barn i filter ${index}`);
+                        event.stopPropagation();
+                        if (!item.classList.contains('active')) {
+                            setActiveFilter(index);
+                        }
+                    });
+                });
+            });
+        
+            // Sätt första elementet som aktivt initialt
+            setActiveFilter(currentIndex);
+        }
+        
+        function disableCarousel() {
+            const filterGrid = document.querySelector('.filter-grid');
+            const filterItems = document.querySelectorAll('.filter-item');
+        
+            // Rensa karusellrelaterade stilar utan att påverka andra händelselyssnare
+            filterItems.forEach(item => {
+                item.classList.remove('active');
+                item.style.display = 'inline-block';
+                item.style.transform = 'scale(1)';
+                item.style.opacity = '1';
+            });
+        
+            // Inaktivera scroll-snap och återställ scroll
+            filterGrid.style.scrollSnapType = 'none';
+            filterGrid.scrollTo({ left: 0, behavior: 'auto' });
+            console.log('Karusell inaktiverad på desktop, knappar oförändrade');
+        }
+        
+        // Kör vid sidladdning
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        console.log(`Sidladdning: ${isMobile ? 'Mobil' : 'Desktop'}`);
+        if (isMobile) {
+            setupPagination();
+        } else {
+            disableCarousel();
+        }
+        
+        // Hantera fönsterstorleksändringar
+        let lastIsMobile = isMobile;
+        window.addEventListener('resize', () => {
+            const currentIsMobile = window.matchMedia('(max-width: 768px)').matches;
+            if (currentIsMobile !== lastIsMobile) {
+                console.log(`Resize: ${currentIsMobile ? 'Mobil' : 'Desktop'}`);
+                if (currentIsMobile) {
+                    setupPagination();
+                } else {
+                    disableCarousel();
+                }
+                lastIsMobile = currentIsMobile;
             }
         });
         console.log("Hämtar deals.json...");
@@ -431,8 +471,6 @@ const dealScope = {
                 if (sortByDropdownContent && sortByDropdownContent.style.display === 'block') {
                     hideSortByDropdown();
                 }
-
-                // Hantera den undre gränsen direkt i JavaScript
                 if (isVisible) {
                     categoryButton.style.borderBottomColor = '';
                     categoryButton.style.borderBottomLeftRadius = '32px';

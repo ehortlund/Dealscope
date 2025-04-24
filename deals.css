@@ -268,43 +268,38 @@ body {
 }
 
 .filter-grid {
+    margin-left: 55px;
     display: flex;
-    flex-wrap: nowrap; /* Förhindrar radbrytning på desktop */
+    flex-wrap: nowrap;
     width: 100%;
-    gap: 20px; /* Avstånd mellan filter */
+    gap: 25px;
+    transition: transform 0.3s ease; /* Smidig karusellrörelse */
 }
 
-.filter-nav-prev,
-.filter-nav-next {
-    display: block; /* Syns som standard, men styrs av media query */
-    background-color: #f0f0f0;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 0 5px;
+.filter-item {
+    display: inline-block;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Smidig övergång */
+    cursor: pointer; /* Gör klickbart */
+    width: 120px; /* Ökad bredd för bättre synlighet */
 }
 
-.filter-nav-prev:disabled,
-.filter-nav-next:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
 
 @media (min-width: 769px) {
     .filter-nav-prev,
     .filter-nav-next {
         display: none; /* Dolda på desktop */
     }
+    
 }
+
 .deals-filter-bar {
-    margin-left: 55px;
     display: flex;
     align-items: center;
     position: relative;
     z-index: 1000;
-    overflow: visible; /* Ingen klippning */
-    width: 100%; /* Säkerställer full bredd */
+    overflow: visible;
+    width: 100%;
 }
 
 /* Dölj filterbaren när deal-detaljer visas */
@@ -944,25 +939,29 @@ body {
     }
 
     .deals-filter-bar {
-        display: flex; /* Använd flexbox för horisontell layout */
-        flex-direction: row; /* Säkerställ att elementen ligger i rad */
-        align-items: center; /* Justera vertikal centrering efter behov */
-        overflow: visible; /* Ingen klippning av dropdown */
-        -webkit-overflow-scrolling: touch; /* För smidig scrollning på iOS */
-        padding: 10px; /* Lägg till lite padding runt om */
-        gap: 10px; /* Avstånd mellan filterelementen */
-        width: 100%; /* Låt filterbaren ta upp hela bredden */
-        margin-left: 0;
+        overflow: visible;
     }
 
     .filter-grid {
-        display: grid;
-        grid-template-columns: 1fr; /* En kolumn för pagination */
-        width: 100%;
+        margin-left: 0;
+        display: flex;
+        justify-content: center;
+        gap: 10px; /* Justera avståndet mellan filterelementen */
+
     }
 
     .filter-item {
-        display: none; /* Döljs initialt, visas av JS */
+        transform: scale(0.7); /* Mindre storlek för icke-aktiva */
+        opacity: 0.5; /* Lägre opacitet för icke-aktiva */
+        pointer-events: auto; /* Säkerställer klickbarhet */
+        width: 100px; /* Fast bredd för konsekvent karusell */
+        text-align: center; /* Centrera innehåll */
+    }
+
+    .filter-item.active {
+        transform: scale(1); /* Normal storlek för aktivt */
+        opacity: 1; /* Full opacitet för aktivt */
+        z-index: 1200; /* Över andra filter */
     }
 
     .filter-item:first-child {
@@ -999,9 +998,17 @@ body {
         flex-shrink: 0; /* Förhindra att elementen krymper för mycket */
     }
     
-    .deals-filter-bar::-webkit-scrollbar {
-        display: none; /* För Chrome, Safari, Opera */
+    .category-dropdown-content,
+    .sort-by-dropdown-content,
+    .search-results-dropdown {
+    z-index: 1100;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
+
 
     /* Om du har en wrapper runt dina filterelement */
     /* .filter-wrapper {
