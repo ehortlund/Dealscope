@@ -362,9 +362,10 @@ body {
     padding: 10px 20px;
     cursor: pointer;
     margin-top: 15px;
-    border-radius: 5px;
+    border-radius: 15px;
     transition: background 0.3s;
 }
+
 
 .select-plan:hover {
     background: #d32f2f;
@@ -378,7 +379,7 @@ body {
     background-color: var(--red);
     color: var(--medium-white);
     border: 1px solid var(--red); /* Samma röda färg */
-    border-radius: 32px; /* Rundade hörn */
+    border-radius: 15px; /* Rundade hörn */
     cursor: pointer;
     text-decoration: none; /* Ingen understrykning */
     cursor: pointer; /* Ändrar muspekaren till klickbar */

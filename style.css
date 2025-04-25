@@ -110,7 +110,7 @@ body {
     text-decoration: none;
     border: none;
     padding: 12px 25px;
-    border-radius: 32px;
+    border-radius: 15px;
     margin-top: 20px;
     transition: background-color 0.3s ease, color 0.3s ease;
     text-rendering: optimizeLegibility;
@@ -163,7 +163,7 @@ body {
     font-weight: 500;
     padding: 5px 10px;
     border: 1px solid transparent; /* Ingen cirkel i vanligt läge */
-    border-radius: 20px; /* Rundad effekt vid hover */
+    border-radius: 15px; /* Rundad effekt vid hover */
     transition: all 0.3s ease; /* Smidig övergång */
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -186,7 +186,7 @@ body {
     text-align: center;
     font-size: 16px;
     padding: 12px 32px;
-    border-radius: 20px; /* Rundad för cirkeleffekt */
+    border-radius: 15px; /* Rundad för cirkeleffekt */
     background-color: transparent; /* Ingen bakgrund i vanligt läge */
     transition: all 0.3s ease; /* Smidig övergång */
     text-rendering: optimizeLegibility;
@@ -254,7 +254,7 @@ body {
     background-color: var(--red);
     color: var(--medium-white);
     border: 1px solid var(--red); /* Samma röda färg */
-    border-radius: 32px; /* Rundade hörn */
+    border-radius: 15px; /* Rundade hörn */
     cursor: pointer;
     text-decoration: none; /* Ingen understrykning */
     cursor: pointer; /* Ändrar muspekaren till klickbar */
@@ -454,7 +454,7 @@ body {
     background-color: var(--red);
     color: var(--medium-white);
     border: 1px solid var(--red); /* Samma röda färg */
-    border-radius: 32px; /* Rundade hörn */
+    border-radius: 15px; /* Rundade hörn */
     cursor: pointer;
     text-decoration: none; /* Ingen understrykning */
     cursor: pointer; /* Ändrar muspekaren till klickbar */
@@ -640,7 +640,7 @@ body {
     background-color: var(--black);
     color: var(--medium-white);
     border: 1px solid var(--black); /* Samma röda färg */
-    border-radius: 32px; /* Rundade hörn */
+    border-radius: 15px; /* Rundade hörn */
     cursor: pointer;
     text-decoration: none; /* Ingen understrykning */
     cursor: pointer; /* Ändrar muspekaren till klickbar */
