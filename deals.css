@@ -535,6 +535,32 @@ body {
         font-size: 14px;
     }
 
+    .deal-details-header p {
+        margin-left: 20px;
+        margin-right: 20px;
+        font-size: 14px;
+    }
+
+    .deal-details-container h3 {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .deal-details-container li {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .deal-details-container span {
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    .deal-details-container span.stock-symbol {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
     .deal-link-button {
         padding: 8px 16px
     }
