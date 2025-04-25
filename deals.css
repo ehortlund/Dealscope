@@ -511,6 +511,37 @@ body {
     text-align: right;
 }
 
+/* Deal section anpassning */
+@media (max-width: 768px) {
+    .deal-example-card {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .deal-section-title {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 120px;
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .deal-section-heading {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .deal-description {
+        font-size: 14px;
+    }
+
+    .deal-link-button {
+        padding: 8px 16px
+    }
+
+}
+
+
 /* Responsiv anpassning */
 @media (max-width: 768px) {
     body {
@@ -529,14 +560,6 @@ body {
         border-radius: 15px;
     }
 
-    .deal-section-title {
-        margin-left: 0;
-        margin-right: 0;
-        margin-top: 120px;
-        font-size: 28px;
-        text-align: center;
-    }
-
     .footer-container {
         flex-direction: column;
         text-align: center;
@@ -546,10 +569,6 @@ body {
     .footer-logo-section,
     .footer-links-section {
         text-align: center;
-    }
-
-    .deal-section-heading {
-        font-size: 16px;
     }
 
     .main-header {

@@ -375,7 +375,7 @@ body {
     margin-top: 0;
     font-size: 24px;
     font-weight: 550;
-    padding: 12px 32px;
+    padding: 10px 20px;
     background-color: var(--red);
     color: var(--medium-white);
     border: 1px solid var(--red); /* Samma röda färg */
