@@ -516,6 +516,20 @@ body {
     .deal-example-card {
         margin-left: 0px;
         margin-right: 0px;
+        padding: 20px 10px;
+        max-height: 250px; /* Justera baserat på stängt kort */
+        overflow: hidden;
+        transition: max-height 0.2s linear, padding 0.2s linear, margin-bottom 0.2s linear;
+    }    
+
+    .deal-example-card[data-state="open"] {
+        padding: 20px 10px; /* Justera värden, t.ex. mindre eller större padding */
+        max-height: 350px; /* Justera baserat på öppet kort */
+        transition: max-height 0.2s linear, padding 0.2s linear, margin-bottom 0.2s linear;
+    }
+
+    .deal-example-card ul {
+        margin-left: 0px;
     }
 
     .deal-section-title {
@@ -529,10 +543,13 @@ body {
     .deal-section-heading {
         font-size: 16px;
         font-weight: 600;
+        text-align: center;
     }
 
     .deal-description {
+        text-align: center;
         font-size: 14px;
+        margin-bottom: 25px;
     }
 
     .deal-details-header p {
@@ -556,13 +573,32 @@ body {
         font-weight: 400;
     }
 
+    .deal-details {
+        display:block;
+        justify-content: center; /* Centrera listan horisontellt */
+        margin-left: 0; /* Ta bort vänstermarginal */
+        padding-left: 80px; /* Behåll utrymme för markörer */
+    }
+    .deal-details li {
+        position: relative;
+        padding-left: 10px; /* Avstånd mellan markör och text */
+        text-align: left; /* Säkerställ textjustering */
+    }
+    .deal-details li::marker {
+        color: var(--red);
+        font-size: 12px; /* Markörstorlek */
+    }
+
     .deal-details-container span.stock-symbol {
         font-size: 14px;
         font-weight: 600;
     }
 
     .deal-link-button {
-        padding: 8px 16px
+        padding: 8px 16px;
+        display: block;
+        margin: 0 auto;
+        text-align: center;
     }
 
 }
