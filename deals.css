@@ -343,11 +343,10 @@ body {
 }
 
 .deal-details-header h2 {
-    color: var(--medium-white);
+    color: var(--red);
     font-size: 24px;
     font-weight: 500;
     margin-bottom: 10px;
-    color: var(--red);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -554,25 +553,24 @@ body {
 
     
     .deal-details-header h2 {
-        color: var(--medium-white);
+        color: var(--red);
         font-size: 18px;
-        font-weight: 600;
+        font-weight: 500;
         letter-spacing: 1.3px;
     }
     .deal-details-header p {
-        margin-left: 20px;
-        margin-right: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
         font-size: 14px;
     }
 
     .deal-details-container h3 {
-        font-size: 18px;
-        font-weight: 600;
+        font-size: 14px;
+        font-weight: 500;
     }
 
     .deal-details-container li {
         font-size: 14px;
-        font-weight: 600;
     }
 
     .deal-details-container span {
@@ -593,12 +591,16 @@ body {
     }
     .deal-details li::marker {
         color: var(--red);
-        font-size: 12px; /* Markörstorlek */
+        font-size: 14px; /* Markörstorlek */
     }
 
     .deal-details-container span.stock-symbol {
         font-size: 14px;
         font-weight: 600;
+    }
+
+    ::marker {
+        color: var(--red);
     }
 
     .deal-link-button {
