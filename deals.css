@@ -233,7 +233,7 @@ body {
 .deal-example-card {
     transition: height 0.2s ease-in-out, padding 0.3s ease-in-out, margin-bottom 0.3s ease-in-out;
     position: relative;
-    background-color: rgba(44, 44, 44, 0.434);
+    background-color: rgb(32 32 32 / 22%);
     border: 1px solid var(--red);
     padding: 20px 30px;
     border-radius: 32px;
@@ -308,7 +308,7 @@ body {
 }
 
 .deal-example-card[data-state="open"] {
-    background-color: rgba(44, 44, 44, 0.434);
+    background-color: rgba(49, 49, 49, 0.22);
     padding: 30px 40px;
 }
 
@@ -367,7 +367,7 @@ body {
 }
 
 .deal-details-container {
-    background-color: rgba(44, 44, 44, 0.243);
+    background-color: rgb(32 32 32 / 22%);
     padding: 30px;
     margin: 0px auto;
     margin-bottom: 200px;
@@ -522,6 +522,7 @@ body {
     }    
 
     .deal-example-card[data-state="open"] {
+        background-color: rgba(49, 49, 49, 0.22);
         padding: 20px 20px; /* Justera värden, t.ex. mindre eller större padding */
         max-height: 350px; /* Justera baserat på öppet kort */
         transition: max-height 0.2s linear, padding 0.2s linear, margin-bottom 0.2s linear;
@@ -549,6 +550,11 @@ body {
         text-align: center;
         font-size: 14px;
         margin-bottom: 25px;
+    }
+
+    .deal-details-container {
+        background-color: rgba(49, 49, 49, 0.22);
+
     }
 
     
