@@ -201,6 +201,18 @@ body {
 }
 
 /* Deal-sektion */
+
+
+
+.deal-controls {
+    gap: 25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /* Förhindrar radbrytning */
+    overflow-x: auto; /* Horisontell scroll */
+    padding: 10px 40px 10px 10px; /* Extra utrymme för scroll */
+    -webkit-overflow-scrolling: touch;
+}
 .deal-section {
     display: flex;
     flex-direction: column;
@@ -512,12 +524,33 @@ body {
 
 /* Deal section anpassning */
 @media (max-width: 768px) {
+
+    .deal-dashboard-wrapper {
+        display: block !important; /* Isolera från flex-flöde */
+    }
+
+    .deal-controls {
+        gap:10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap; /* Förhindrar radbrytning */
+        overflow-x: auto; /* Horisontell scroll */
+        padding: 10px 40px 10px 10px; /* Extra utrymme för scroll */
+        -webkit-overflow-scrolling: touch;
+    }
+    .search-container,
+    .category-container,
+    .sort-by-container {
+        flex: 0 0 auto; /* Förhindra krympning */
+        margin-right: 10px; /* Avstånd mellan element */
+    }
+    
     .deal-example-card {
         margin-left: 0px;
-        margin-right: 0px;
+        margin-right: 50px;
         padding: 20px 20px;
         max-height: 250px; /* Justera baserat på stängt kort */
-        overflow: hidden;
+        overflow: hidden !important;
         transition: max-height 0.2s linear, padding 0.2s linear, margin-bottom 0.2s linear;
     }    
 
