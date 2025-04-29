@@ -106,6 +106,7 @@ const dealScope = {
         categoryInput.addEventListener('click', (event) => {
             event.stopPropagation();
             categorySuggestions.style.display = categorySuggestions.style.display === 'block' ? 'none' : 'block';
+            
         });
 
         categoryInput.addEventListener('blur', () => {
