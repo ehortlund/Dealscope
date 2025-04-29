@@ -41,6 +41,21 @@
     <section class="deal-section">
         <h1 class="deal-section-title fade-in">Deal Dashboard</h1>
         <div class="deal-dashboard-wrapper">
+            <!-- Sökfält, kategori och sort by -->
+                <div class="deal-controls">
+                    <div class="search-container">
+                        <input type="text" id="deal-search" placeholder="Search deals...">
+                        <div id="deal-suggestions" class="suggestions-dropdown"></div>
+                    </div>
+                    <div class="category-container">
+                        <input type="text" id="deal-category" placeholder="Category">
+                        <div id="category-suggestions" class="suggestions-dropdown"></div>
+                    </div>
+                    <div class="sort-by-container">
+                        <input type="text" id="deal-sort" placeholder="Sort by">
+                        <div id="sort-suggestions" class="suggestions-dropdown"></div>
+                    </div>
+                </div>
             <div class="deals-container fade-in"></div>
             <div class="deal-details-header fade-in" style="display: none;">
                 <h2>Deal Name</h2>
