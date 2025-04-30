@@ -660,12 +660,12 @@ body {
         border: var(--red ) 1px solid;
         background-color: transparent;
         width: auto; /* Låt bredden anpassas, men begränsas av max-width */
-        max-width: 18ch; /* Max 18 tecken */
     }
 
     #deal-suggestions
     #category-suggestions
     #sort-suggestions {
+        width: 100%;
         max-width: 19ch;
     }
 
