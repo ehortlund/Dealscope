@@ -290,8 +290,6 @@ body {
     border-top: none;
     border-radius: 0 0 15px 15px;
     display: none;
-    max-height: 150px;
-    overflow-y: auto;
     z-index: 2000; /* Högt för att säkerställa att de syns */
     margin-top: -15px; /* Drar upp ramen så den omsluter fältet */
     padding-top: 15px; /* Kompenserar för margin-top så innehållet inte klipps */
@@ -664,6 +662,15 @@ body {
         width: auto; /* Låt bredden anpassas, men begränsas av max-width */
         max-width: 18ch; /* Max 18 tecken */
     }
+
+    #deal-suggestions
+    #category-suggestions
+    #sort-suggestions {
+        max-width: 19ch;
+    }
+
+     
+    
     .search-container,
     .category-container,
     .sort-by-container {
