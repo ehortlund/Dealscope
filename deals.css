@@ -231,6 +231,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 1.3px;
     cursor: pointer;
+    max-width: 18ch; /* Max 10 tecken */
 }
 
 #deal-search {
