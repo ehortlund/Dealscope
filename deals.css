@@ -665,8 +665,7 @@ body {
     #deal-suggestions
     #category-suggestions
     #sort-suggestions {
-        width: 100%;
-        max-width: 19ch;
+        border-right: 3px solid var(--red); /* Öka höger border med 2px */
     }
 
      
