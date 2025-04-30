@@ -294,6 +294,7 @@ body {
     z-index: 2000; /* Högt för att säkerställa att de syns */
     margin-top: -15px; /* Drar upp ramen så den omsluter fältet */
     padding-top: 15px; /* Kompenserar för margin-top så innehållet inte klipps */
+    max-width: 18ch; /* Max 10 tecken */
 }
 
 #category-suggestions {
@@ -308,6 +309,7 @@ body {
     z-index: 2000; /* Högt för att säkerställa att de syns */
     margin-top: -15px; /* Drar upp ramen så den omsluter fältet */
     padding-top: 15px; /* Kompenserar för margin-top så innehållet inte klipps */
+    max-width: 18ch; /* Max 10 tecken */
 }
 
 #deal-suggestions .suggestion-item,
@@ -324,6 +326,8 @@ body {
     letter-spacing: 1.3px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+    max-width: 18ch; /* Max 10 tecken */
+
 }
 
 #deal-suggestions .suggestion-item {
