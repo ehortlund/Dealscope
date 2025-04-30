@@ -231,7 +231,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 1.3px;
     cursor: pointer;
-    max-width: 18ch; /* Max 10 tecken */
 }
 
 #deal-search {
@@ -293,7 +292,6 @@ body {
     z-index: 2000; /* Högt för att säkerställa att de syns */
     margin-top: -15px; /* Drar upp ramen så den omsluter fältet */
     padding-top: 15px; /* Kompenserar för margin-top så innehållet inte klipps */
-    max-width: 18ch; /* Max 10 tecken */
 }
 
 #category-suggestions {
@@ -308,7 +306,6 @@ body {
     z-index: 2000; /* Högt för att säkerställa att de syns */
     margin-top: -15px; /* Drar upp ramen så den omsluter fältet */
     padding-top: 15px; /* Kompenserar för margin-top så innehållet inte klipps */
-    max-width: 18ch; /* Max 10 tecken */
 }
 
 #deal-suggestions .suggestion-item,
@@ -325,15 +322,13 @@ body {
     letter-spacing: 1.3px;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
-    max-width: 18ch; /* Max 10 tecken */
-
 }
 
 #deal-suggestions .suggestion-item {
     white-space: nowrap; /* Förhindra radbrytning */
     overflow: hidden; /* Klipp text som är för lång */
     text-overflow: ellipsis; /* Lägg till tre prickar */
-    max-width: 15ch; /* Max 10 tecken */
+    max-width: 20ch; /* Max 10 tecken */
 }
 
 #deal-suggestions .suggestion-item:hover,
@@ -665,8 +660,7 @@ body {
     #deal-suggestions
     #category-suggestions
     #sort-suggestions {
-        border-right: 3px solid var(--red); /* Öka höger border med 2px */
-        max-width: calc(18ch - 2px); /* Kompensera för den ökade höger border */
+
     }
 
      
