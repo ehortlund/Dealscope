@@ -220,15 +220,22 @@ body {
 #deal-sort {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
+    font-weight: 500;
     padding: 8px 16px;
     border-radius: 15px;
     border: var(--red ) 1px solid;
     background-color: transparent;
     color: gray;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
+    cursor: pointer;
 }
 
 #deal-search {
-    color: var(--medium-white);
+    color: var(--soft-white);
+    cursor: text;
 }
 
 #deal-search:focus,
@@ -286,6 +293,8 @@ body {
     max-height: 150px;
     overflow-y: auto;
     z-index: 2000; /* Högt för att säkerställa att de syns */
+    margin-top: -15px; /* Drar upp ramen så den omsluter fältet */
+    padding-top: 15px; /* Kompenserar för margin-top så innehållet inte klipps */
 }
 
 #deal-suggestions .suggestion-item,
@@ -309,6 +318,11 @@ body {
 #sort-suggestions .suggestion-item:hover {
     background-color: rgba(255, 0, 0, 0.1);
     color: var(--red);
+}
+
+#deal-category.active::placeholder,
+#deal-sort.active::placeholder {
+    color: var(--soft-white); /* Ljusare färg när dropdown är aktiv */
 }
 
 
@@ -670,6 +684,7 @@ body {
 
     .deal-details-container {
         background-color: rgba(49, 49, 49, 0.22);
+        margin-right: 50px;
 
     }
 
@@ -679,10 +694,11 @@ body {
         font-size: 18px;
         font-weight: 500;
         letter-spacing: 1.3px;
+        margin-right: 50px;
     }
     .deal-details-header p {
         margin-left: 10px;
-        margin-right: 10px;
+        margin-right: 50px;
         font-size: 14px;
     }
 
@@ -707,8 +723,10 @@ body {
         padding-left: 80px; /* Behåll utrymme för markörer */
     }
     .deal-details li {
+        font-size: 16px;
+        font-weight: 500;
         position: relative;
-        padding-left: 10px; /* Avstånd mellan markör och text */
+        padding-left: 0px; /* Avstånd mellan markör och text */
         text-align: left; /* Säkerställ textjustering */
     }
     .deal-details li::marker {

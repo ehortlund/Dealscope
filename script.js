@@ -105,8 +105,9 @@ const dealScope = {
         // Kategori: Visa/dölj dropdown vid klick
         categoryInput.addEventListener('click', (event) => {
             event.stopPropagation();
-            categorySuggestions.style.display = categorySuggestions.style.display === 'block' ? 'none' : 'block';
-            
+            const isVisible = categorySuggestions.style.display === 'block';
+            categorySuggestions.style.display = isVisible ? 'none' : 'block';
+            categoryInput.classList.toggle('active', !isVisible); // Lägg till/ta bort active
         });
 
         categoryInput.addEventListener('blur', () => {
@@ -118,7 +119,9 @@ const dealScope = {
         // Sort by: Visa/dölj dropdown vid klick
         sortInput.addEventListener('click', (event) => {
             event.stopPropagation();
-            sortSuggestions.style.display = sortSuggestions.style.display === 'block' ? 'none' : 'block';
+            const isVisible = sortSuggestions.style.display === 'block';
+            sortSuggestions.style.display = isVisible ? 'none' : 'block';
+            sortInput.classList.toggle('active', !isVisible); // Lägg till/ta bort active
         });
 
         sortInput.addEventListener('blur', () => {
@@ -134,9 +137,11 @@ const dealScope = {
             }
             if (!categoryInput.parentElement.contains(event.target)) {
                 categorySuggestions.style.display = 'none';
+                categoryInput.classList.remove('active');
             }
             if (!sortInput.parentElement.contains(event.target)) {
                 sortSuggestions.style.display = 'none';
+                sortInput.classList.remove('active');
             }
         });
     },
@@ -264,16 +269,20 @@ const dealScope = {
     addDealCardEventListeners: function (dealsContainer) {
         dealsContainer.addEventListener("click", (event) => {
             const card = event.target.closest(".deal-example-card");
-            if (!card || event.target.classList.contains("deal-link-button")) return;
-
-            const state = card.getAttribute("data-state");
-            card.setAttribute("data-state", state === "closed" ? "open" : "closed");
-
-            if (event.target.classList.contains("deal-link-button")) {
+            const readMoreButton = event.target.classList.contains("deal-link-button");
+    
+            // Hantera klick på "Read More"-knappen
+            if (readMoreButton) {
                 event.preventDefault();
-                const dealCard = event.target.closest(".deal-example-card");
-                const dealTitle = dealCard.querySelector(".deal-section-heading").textContent;
+                const dealTitle = card.querySelector(".deal-section-heading").textContent;
                 this.showDealDetails(dealTitle);
+                return; // Stoppa vidare hantering för "Read More"
+            }
+    
+            // Hantera klick på kortet för att toggla open/closed
+            if (card) {
+                const state = card.getAttribute("data-state");
+                card.setAttribute("data-state", state === "closed" ? "open" : "closed");
             }
         });
     },
