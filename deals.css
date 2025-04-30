@@ -328,7 +328,7 @@ body {
     white-space: nowrap; /* Förhindra radbrytning */
     overflow: hidden; /* Klipp text som är för lång */
     text-overflow: ellipsis; /* Lägg till tre prickar */
-    max-width: 20ch; /* Max 10 tecken */
+    max-width: 15ch; /* Max 10 tecken */
 }
 
 #deal-suggestions .suggestion-item:hover,
