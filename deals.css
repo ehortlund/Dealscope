@@ -280,7 +280,6 @@ body {
 }
 
 #deal-suggestions,
-#category-suggestions,
 #sort-suggestions {
     top: 100%;
     left: 0;
@@ -292,6 +291,20 @@ body {
     display: none;
     max-height: 150px;
     overflow-y: auto;
+    z-index: 2000; /* Högt för att säkerställa att de syns */
+    margin-top: -15px; /* Drar upp ramen så den omsluter fältet */
+    padding-top: 15px; /* Kompenserar för margin-top så innehållet inte klipps */
+}
+
+#category-suggestions {
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--vantablack);
+    border: 1px solid var(--red);
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    display: none;
     z-index: 2000; /* Högt för att säkerställa att de syns */
     margin-top: -15px; /* Drar upp ramen så den omsluter fältet */
     padding-top: 15px; /* Kompenserar för margin-top så innehållet inte klipps */
@@ -313,6 +326,13 @@ body {
     transition: background-color 0.2s ease-in-out;
 }
 
+#deal-suggestions .suggestion-item {
+    white-space: nowrap; /* Förhindra radbrytning */
+    overflow: hidden; /* Klipp text som är för lång */
+    text-overflow: ellipsis; /* Lägg till tre prickar */
+    max-width: 15ch; /* Max 10 tecken */
+}
+
 #deal-suggestions .suggestion-item:hover,
 #category-suggestions .suggestion-item:hover,
 #sort-suggestions .suggestion-item:hover {
@@ -323,6 +343,8 @@ body {
 #deal-category.active::placeholder,
 #deal-sort.active::placeholder {
     color: var(--soft-white); /* Ljusare färg när dropdown är aktiv */
+    z-index: 2000; /* För att säkerställa att den är överst */
+    background-color: var(--vantablack);
 }
 
 
