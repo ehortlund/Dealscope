@@ -630,6 +630,10 @@ body {
 /* Deal section anpassning */
 @media (max-width: 768px) {
 
+    .deal-section {
+        padding: 0px;
+    }
+
     .deal-dashboard-wrapper {
         display: block !important; /* Isolera från flex-flöde */
     }
@@ -641,7 +645,7 @@ body {
         flex-direction: row;
         flex-wrap: nowrap; /* Förhindrar radbrytning */
         overflow-x: auto; /* Horisontell scroll */
-        padding: 10px 40px 10px 10px; /* Extra utrymme för scroll */
+        padding: 10px 10px 10px 10px; /* Extra utrymme för scroll */
         -webkit-overflow-scrolling: touch;
     }
 
@@ -654,7 +658,9 @@ body {
         border-radius: 15px;
         border: var(--red ) 1px solid;
         background-color: transparent;
-        width: 150px; /* Fast bredd i pixlar, matchar fältet */    }
+        width: 150px; /* Fast bredd i pixlar, matchar fältet */    
+        touch-action: manipulation; /* Förhindrar zoom vid interaktion */
+    }
 
     #deal-suggestions
     #category-suggestions
@@ -672,8 +678,8 @@ body {
     }
     
     .deal-example-card {
-        margin-left: 0px;
-        margin-right: 50px;
+        margin-left: 25px;
+        margin-right: 25px;
         padding: 20px 20px;
         max-height: 250px; /* Justera baserat på stängt kort */
         overflow: hidden !important;
@@ -693,7 +699,7 @@ body {
 
     .deal-section-title {
         margin-left: 0;
-        margin-right: 45px;
+        margin-right: 0px;
         margin-top: 120px;
         font-size: 28px;
         text-align: center;
@@ -713,8 +719,8 @@ body {
 
     .deal-details-container {
         background-color: rgba(49, 49, 49, 0.22);
-        margin-right: 50px;
-
+        margin-left: 35px;
+        margin-right: 35px;
     }
 
     
@@ -723,11 +729,10 @@ body {
         font-size: 18px;
         font-weight: 500;
         letter-spacing: 1.3px;
-        margin-right: 50px;
     }
     .deal-details-header p {
-        margin-left: 10px;
-        margin-right: 50px;
+        margin-left: 20px;
+        margin-right: 20px;
         font-size: 14px;
     }
 
