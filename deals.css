@@ -661,6 +661,8 @@ body {
         border-radius: 15px;
         border: var(--red ) 1px solid;
         background-color: transparent;
+        width: auto; /* Låt bredden anpassas, men begränsas av max-width */
+        max-width: 18ch; /* Max 18 tecken */
     }
     .search-container,
     .category-container,
