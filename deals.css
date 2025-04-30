@@ -666,6 +666,7 @@ body {
     #category-suggestions
     #sort-suggestions {
         border-right: 3px solid var(--red); /* Öka höger border med 2px */
+        max-width: calc(18ch - 2px); /* Kompensera för den ökade höger border */
     }
 
      
