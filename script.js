@@ -23,17 +23,19 @@ const dealScope = {
             console.error("Fel vid hämtning av deals:", error);
         }
 
-        // Back-button-händelse
+        // Back-button-händelse och View Deal-händelse
         const dealDetailsContainer = document.querySelector(".deal-details-container");
         if (dealDetailsContainer) {
             dealDetailsContainer.addEventListener("click", (event) => {
                 if (event.target.classList.contains("back-button")) {
                     const dealDetailsHeader = document.querySelector(".deal-details-header");
+                    const dealRecommendations = document.querySelector(".deal-recommendations");
                     const dealsContainer = document.querySelector(".deals-container");
                     const dealSectionTitle = document.querySelector(".deal-section-title");
 
                     if (dealDetailsHeader) dealDetailsHeader.style.display = "none";
                     dealDetailsContainer.style.display = "none";
+                    if (dealRecommendations) dealRecommendations.style.display = "none";
                     if (dealsContainer) dealsContainer.style.display = "block";
                     if (dealSectionTitle) dealSectionTitle.style.display = "block";
                 }
@@ -64,9 +66,11 @@ const dealScope = {
             option.className = 'suggestion-item';
             option.textContent = category;
             option.addEventListener('click', (event) => {
-                event.stopPropagation(); // Förhindra att blur-event stänger dropdownen direkt
+                event.stopPropagation();
+                console.log(`Vald kategori: ${category}`); // Felsökningslogg
                 categoryInput.value = category;
                 categorySuggestions.style.display = 'none';
+                categoryInput.classList.remove('active');
                 this.filterDeals(searchInput.value, category === 'All' ? '' : category.toLowerCase());
             });
             categorySuggestions.appendChild(option);
@@ -81,6 +85,7 @@ const dealScope = {
                 event.stopPropagation();
                 sortInput.value = sortOption;
                 sortSuggestions.style.display = 'none';
+                sortInput.classList.remove('active');
                 this.sortDeals(sortOption);
             });
             sortSuggestions.appendChild(option);
@@ -107,12 +112,13 @@ const dealScope = {
             event.stopPropagation();
             const isVisible = categorySuggestions.style.display === 'block';
             categorySuggestions.style.display = isVisible ? 'none' : 'block';
-            categoryInput.classList.toggle('active', !isVisible); // Lägg till/ta bort active
+            categoryInput.classList.toggle('active', !isVisible);
         });
 
         categoryInput.addEventListener('blur', () => {
             setTimeout(() => {
                 categorySuggestions.style.display = 'none';
+                categoryInput.classList.remove('active');
             }, 150);
         });
 
@@ -121,12 +127,13 @@ const dealScope = {
             event.stopPropagation();
             const isVisible = sortSuggestions.style.display === 'block';
             sortSuggestions.style.display = isVisible ? 'none' : 'block';
-            sortInput.classList.toggle('active', !isVisible); // Lägg till/ta bort active
+            sortInput.classList.toggle('active', !isVisible);
         });
 
         sortInput.addEventListener('blur', () => {
             setTimeout(() => {
                 sortSuggestions.style.display = 'none';
+                sortInput.classList.remove('active');
             }, 150);
         });
 
@@ -186,6 +193,7 @@ const dealScope = {
     },
 
     filterDeals: function (searchTerm, category) {
+        console.log(`Filtrerar deals med searchTerm: ${searchTerm}, category: ${category}`); // Felsökningslogg
         this.currentDeals = this.allDeals.filter(deal => {
             const matchesSearch = searchTerm === '' || 
                 deal.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -270,15 +278,15 @@ const dealScope = {
         dealsContainer.addEventListener("click", (event) => {
             const card = event.target.closest(".deal-example-card");
             const readMoreButton = event.target.classList.contains("deal-link-button");
-    
+
             // Hantera klick på "Read More"-knappen
             if (readMoreButton) {
                 event.preventDefault();
                 const dealTitle = card.querySelector(".deal-section-heading").textContent;
                 this.showDealDetails(dealTitle);
-                return; // Stoppa vidare hantering för "Read More"
+                return;
             }
-    
+
             // Hantera klick på kortet för att toggla open/closed
             if (card) {
                 const state = card.getAttribute("data-state");
@@ -295,13 +303,23 @@ const dealScope = {
                 if (deal) {
                     const dealDetailsHeader = document.querySelector(".deal-details-header");
                     const dealDetailsContainer = document.querySelector(".deal-details-container");
+                    const dealRecommendations = document.querySelector(".deal-recommendations") || document.createElement("div");
                     const dealsContainer = document.querySelector(".deals-container");
                     const dealSectionTitle = document.querySelector(".deal-section-title");
 
                     dealDetailsHeader.innerHTML = `<h2>${deal.title}</h2><p>${deal.description}</p>`;
                     dealDetailsContainer.innerHTML = this.generateDealDetails(deal);
+                    dealRecommendations.className = "deal-recommendations";
+                    dealRecommendations.innerHTML = this.generateDealRecommendations(data, dealTitle);
+                    
+                    // Placera deal-recommendations efter deal-details-container
+                    if (!dealRecommendations.parentNode) {
+                        dealDetailsContainer.parentNode.insertBefore(dealRecommendations, dealDetailsContainer.nextSibling);
+                    }
+
                     dealDetailsHeader.style.display = "block";
                     dealDetailsContainer.style.display = "block";
+                    dealRecommendations.style.display = "block";
                     dealsContainer.style.display = "none";
                     if (dealSectionTitle) dealSectionTitle.style.display = "none";
                 }
@@ -332,6 +350,21 @@ const dealScope = {
 
                 <button class="back-button">Go back</button>
             </div>
+        `;
+    },
+
+    generateDealRecommendations: function (deals, currentDealTitle) {
+        // Filtrera bort den aktuella dealen och ta de första två andra deals
+        const otherDeals = deals.filter(deal => deal.title !== currentDealTitle).slice(0, 2);
+        return `
+            <h3 class="deal-recommendations-title">More deals</h3>
+            ${otherDeals.map(deal => `
+                <div class="deal-recommendation">
+                    <span class="deal-recommendation-title">${deal.title}</span>
+                    <span class="deal-recommendation-value">Value: ${deal.dealValue || 'N/A'}</span>
+                    <button class="deal-recommendation-button" data-title="${deal.title}">View Deal</button>
+                </div>
+            `).join('')}
         `;
     },
 
