@@ -32,12 +32,14 @@ const dealScope = {
                     const dealRecommendations = document.querySelector(".deal-recommendations");
                     const dealsContainer = document.querySelector(".deals-container");
                     const dealSectionTitle = document.querySelector(".deal-section-title");
+                    const dealControls = document.querySelector(".deal-controls");
 
                     if (dealDetailsHeader) dealDetailsHeader.style.display = "none";
                     dealDetailsContainer.style.display = "none";
                     if (dealRecommendations) dealRecommendations.style.display = "none";
                     if (dealsContainer) dealsContainer.style.display = "block";
                     if (dealSectionTitle) dealSectionTitle.style.display = "block";
+                    if (dealControls) dealControls.style.display = "flex"; // Visa deal-controls igen
                 }
             });
         }
@@ -58,7 +60,7 @@ const dealScope = {
         const categoryInput = document.querySelector('#deal-category');
         const categorySuggestions = document.querySelector('#category-suggestions');
         const sortInput = document.querySelector('#deal-sort');
-        const sortSuggestions = document.querySelector('#sort-suggestions');
+        const sortSuggestions = document.querySelector('#sort-suggestions'); // Korrigerat ID
 
         // Sätt initialt tillstånd för dropdowns (stängda)
         searchSuggestions.style.display = 'none';
@@ -100,10 +102,12 @@ const dealScope = {
 
         // Sökfält: Visa/dölj dropdown vid fokus och input
         searchInput.addEventListener('focus', () => {
+            console.log("Sökfält fokuserat"); // Felsökningslogg
             this.updateSearchSuggestions(searchInput.value);
         });
 
         searchInput.addEventListener('input', () => {
+            console.log(`Sökterm: ${searchInput.value}`); // Felsökningslogg
             this.updateSearchSuggestions(searchInput.value);
             this.filterDeals(searchInput.value, categoryInput.value.toLowerCase() === 'all' ? '' : categoryInput.value.toLowerCase());
         });
@@ -116,6 +120,7 @@ const dealScope = {
 
         // Kategori: Visa/dölj dropdown vid klick
         categoryInput.addEventListener('click', (event) => {
+            console.log("Klickade på category-fältet"); // Felsökningslogg
             const isVisible = categorySuggestions.style.display === 'block';
             categorySuggestions.style.display = isVisible ? 'none' : 'block';
             categoryInput.classList.toggle('active', !isVisible);
@@ -130,6 +135,7 @@ const dealScope = {
 
         // Sort by: Visa/dölj dropdown vid klick
         sortInput.addEventListener('click', (event) => {
+            console.log("Klickade på sort by-fältet"); // Felsökningslogg
             const isVisible = sortSuggestions.style.display === 'block';
             sortSuggestions.style.display = isVisible ? 'none' : 'block';
             sortInput.classList.toggle('active', !isVisible);
@@ -316,6 +322,7 @@ const dealScope = {
                     const dealRecommendations = document.querySelector(".deal-recommendations") || document.createElement("div");
                     const dealsContainer = document.querySelector(".deals-container");
                     const dealSectionTitle = document.querySelector(".deal-section-title");
+                    const dealControls = document.querySelector(".deal-controls");
 
                     dealDetailsHeader.innerHTML = `<h2>${deal.title}</h2><p>${deal.description}</p>`;
                     dealDetailsContainer.innerHTML = this.generateDealDetails(deal);
@@ -332,6 +339,10 @@ const dealScope = {
                     dealRecommendations.style.display = "block";
                     dealsContainer.style.display = "none";
                     if (dealSectionTitle) dealSectionTitle.style.display = "none";
+                    if (dealControls) dealControls.style.display = "none"; // Dölj deal-controls
+
+                    // Scrolla till toppen av sidan
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             });
     },
@@ -364,8 +375,8 @@ const dealScope = {
     },
 
     generateDealRecommendations: function (deals, currentDealTitle) {
-        // Filtrera bort den aktuella dealen och ta de första två andra deals
-        const otherDeals = deals.filter(deal => deal.title !== currentDealTitle).slice(0, 2);
+        // Filtrera bort den aktuella dealen och ta de första tre andra deals
+        const otherDeals = deals.filter(deal => deal.title !== currentDealTitle).slice(0, 3);
         return `
             <h3 class="deal-recommendations-title">More deals</h3>
             ${otherDeals.map(deal => `
