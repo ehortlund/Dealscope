@@ -23,7 +23,7 @@ const dealScope = {
             console.error("Fel vid hämtning av deals:", error);
         }
 
-        // Back-button-händelse och View Deal-händelse
+        // Back-button-händelse
         const dealDetailsContainer = document.querySelector(".deal-details-container");
         if (dealDetailsContainer) {
             dealDetailsContainer.addEventListener("click", (event) => {
@@ -41,6 +41,15 @@ const dealScope = {
                 }
             });
         }
+
+        // Händelselyssnare för "View Deal"-knappar på dokumentnivå
+        document.addEventListener("click", (event) => {
+            if (event.target.classList.contains("deal-recommendation-button")) {
+                const dealTitle = event.target.getAttribute("data-title");
+                console.log(`Klickade på View Deal för: ${dealTitle}`); // Felsökningslogg
+                this.showDealDetails(dealTitle);
+            }
+        });
     },
 
     setupControls: function () {
@@ -66,7 +75,6 @@ const dealScope = {
             option.className = 'suggestion-item';
             option.textContent = category;
             option.addEventListener('click', (event) => {
-                event.stopPropagation();
                 console.log(`Vald kategori: ${category}`); // Felsökningslogg
                 categoryInput.value = category;
                 categorySuggestions.style.display = 'none';
@@ -82,7 +90,6 @@ const dealScope = {
             option.className = 'suggestion-item';
             option.textContent = sortOption;
             option.addEventListener('click', (event) => {
-                event.stopPropagation();
                 sortInput.value = sortOption;
                 sortSuggestions.style.display = 'none';
                 sortInput.classList.remove('active');
@@ -109,7 +116,6 @@ const dealScope = {
 
         // Kategori: Visa/dölj dropdown vid klick
         categoryInput.addEventListener('click', (event) => {
-            event.stopPropagation();
             const isVisible = categorySuggestions.style.display === 'block';
             categorySuggestions.style.display = isVisible ? 'none' : 'block';
             categoryInput.classList.toggle('active', !isVisible);
@@ -124,7 +130,6 @@ const dealScope = {
 
         // Sort by: Visa/dölj dropdown vid klick
         sortInput.addEventListener('click', (event) => {
-            event.stopPropagation();
             const isVisible = sortSuggestions.style.display === 'block';
             sortSuggestions.style.display = isVisible ? 'none' : 'block';
             sortInput.classList.toggle('active', !isVisible);
@@ -177,7 +182,6 @@ const dealScope = {
             option.className = 'suggestion-item';
             option.textContent = suggestion;
             option.addEventListener('click', (event) => {
-                event.stopPropagation();
                 document.querySelector('#deal-search').value = suggestion;
                 searchSuggestions.style.display = 'none';
                 this.filterDeals(suggestion, document.querySelector('#deal-category').value.toLowerCase() === 'all' ? '' : document.querySelector('#deal-category').value.toLowerCase());
@@ -275,9 +279,13 @@ const dealScope = {
     },
 
     addDealCardEventListeners: function (dealsContainer) {
-        dealsContainer.addEventListener("click", (event) => {
+        // Ta bort tidigare lyssnare för att undvika dubletter
+        dealsContainer.removeEventListener("click", this.handleCardClick);
+        this.handleCardClick = (event) => {
             const card = event.target.closest(".deal-example-card");
             const readMoreButton = event.target.classList.contains("deal-link-button");
+
+            console.log("Klick på kort registrerat"); // Felsökningslogg
 
             // Hantera klick på "Read More"-knappen
             if (readMoreButton) {
@@ -288,11 +296,13 @@ const dealScope = {
             }
 
             // Hantera klick på kortet för att toggla open/closed
-            if (card) {
+            if (card && !event.target.closest('#category-suggestions')) {
                 const state = card.getAttribute("data-state");
+                console.log(`Togglar kortstate: ${state} -> ${state === "closed" ? "open" : "closed"}`); // Felsökningslogg
                 card.setAttribute("data-state", state === "closed" ? "open" : "closed");
             }
-        });
+        };
+        dealsContainer.addEventListener("click", this.handleCardClick);
     },
 
     showDealDetails: function (dealTitle) {
