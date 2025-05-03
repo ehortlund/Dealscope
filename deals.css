@@ -435,7 +435,7 @@ body {
     font-weight: 450;
     background-color: var(--red);
     color: white;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border: 1px solid var(--red);
     cursor: pointer;
     border-radius: 15px;
@@ -455,7 +455,7 @@ body {
 /* Detaljsida */
 .deal-details-header {
     text-align: center;
-    margin-top: 100px;
+    margin-top: 70px;
     margin-bottom: 50px;
 }
 
@@ -516,7 +516,7 @@ body {
     font-weight: 400;
     background-color: var(--red);
     color: white;
-    padding: 8px 20px;
+    padding: 8px 16px;
     border: 1px solid var(--red);
     cursor: pointer;
     border-radius: 15px;
@@ -574,7 +574,7 @@ body {
 }
 
 .deal-recommendation-title {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     color: var(--medium-white);
     text-rendering: optimizeLegibility;
@@ -588,7 +588,7 @@ body {
 }
 
 .deal-recommendation-value {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     color: var(--green);
     margin-left: 0px;
@@ -604,12 +604,12 @@ body {
 
 .deal-recommendation-button {
     font-family: 'Poppins', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 450;
     background-color: transparent;
     border: 1px solid var(--red);
-    color: var(--red);
-    padding: 6px 12px;
+    color: var(--medium-white);
+    padding: 8px 16px;
     border-radius: 12px;
     cursor: pointer;
     text-decoration: none;
@@ -621,8 +621,8 @@ body {
 }
 
 .deal-recommendation-button:hover {
-    background-color: var(--red);
-    color: var(--white);
+    background-color: transparent;
+    color: var(--red);
 }
 
 /* Footer */
@@ -804,8 +804,12 @@ body {
         background-color: rgba(49, 49, 49, 0.22);
         margin-left: 35px;
         margin-right: 35px;
+        margin-bottom: 50px;
     }
 
+    .deal-details-header {
+        margin-top: 50px;
+    }
     
     .deal-details-header h2 {
         color: var(--red);
