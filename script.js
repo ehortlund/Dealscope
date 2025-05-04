@@ -40,6 +40,9 @@ const dealScope = {
                     if (dealsContainer) dealsContainer.style.display = "block";
                     if (dealSectionTitle) dealSectionTitle.style.display = "block";
                     if (dealControls) dealControls.style.display = "flex"; // Visa deal-controls igen
+
+                    // Återställ historiken till deals-vyn
+                    history.pushState({ page: 'deals' }, '', 'deals.html');
                 }
             });
         }
@@ -52,6 +55,18 @@ const dealScope = {
                 this.showDealDetails(dealTitle);
             }
         });
+
+        // Hantera bakåtnavigering med webbläsarens bakåtknapp
+        window.onpopstate = (event) => {
+            console.log("Bakåtnavigering detekterad", event.state); // Felsökningslogg
+            if (event.state && event.state.page === 'details') {
+                // Om användaren är på detaljvyn och navigerar bakåt, gå till deals.html
+                window.location.href = "deals.html";
+            }
+        };
+
+        // Sätt initialt tillstånd för deals-vyn
+        history.replaceState({ page: 'deals' }, '', 'deals.html');
     },
 
     setupControls: function () {
@@ -60,7 +75,7 @@ const dealScope = {
         const categoryInput = document.querySelector('#deal-category');
         const categorySuggestions = document.querySelector('#category-suggestions');
         const sortInput = document.querySelector('#deal-sort');
-        const sortSuggestions = document.querySelector('#sort-suggestions'); // Korrigerat ID
+        const sortSuggestions = document.querySelector('#sort-suggestions');
 
         // Sätt initialt tillstånd för dropdowns (stängda)
         searchSuggestions.style.display = 'none';
@@ -340,6 +355,9 @@ const dealScope = {
                     dealsContainer.style.display = "none";
                     if (dealSectionTitle) dealSectionTitle.style.display = "none";
                     if (dealControls) dealControls.style.display = "none"; // Dölj deal-controls
+
+                    // Lägg till tillstånd för detaljvyn i historiken
+                    history.pushState({ page: 'details' }, '', `deal-details-${dealTitle}`);
 
                     // Scrolla till toppen av sidan
                     window.scrollTo({ top: 0, behavior: 'smooth' });
