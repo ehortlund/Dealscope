@@ -28,21 +28,7 @@ const dealScope = {
         if (dealDetailsContainer) {
             dealDetailsContainer.addEventListener("click", (event) => {
                 if (event.target.classList.contains("back-button")) {
-                    const dealDetailsHeader = document.querySelector(".deal-details-header");
-                    const dealRecommendations = document.querySelector(".deal-recommendations");
-                    const dealsContainer = document.querySelector(".deals-container");
-                    const dealSectionTitle = document.querySelector(".deal-section-title");
-                    const dealControls = document.querySelector(".deal-controls");
-
-                    if (dealDetailsHeader) dealDetailsHeader.style.display = "none";
-                    dealDetailsContainer.style.display = "none";
-                    if (dealRecommendations) dealRecommendations.style.display = "none";
-                    if (dealsContainer) dealsContainer.style.display = "block";
-                    if (dealSectionTitle) dealSectionTitle.style.display = "block";
-                    if (dealControls) dealControls.style.display = "flex"; // Visa deal-controls igen
-
-                    // Återställ historiken till deals-vyn
-                    history.pushState({ page: 'deals' }, '', 'deals.html');
+                    this.handleGoBack();
                 }
             });
         }
@@ -59,14 +45,34 @@ const dealScope = {
         // Hantera bakåtnavigering med webbläsarens bakåtknapp
         window.onpopstate = (event) => {
             console.log("Bakåtnavigering detekterad", event.state); // Felsökningslogg
-            if (event.state && event.state.page === 'details') {
-                // Om användaren är på detaljvyn och navigerar bakåt, gå till deals.html
-                window.location.href = "deals.html";
+            const dealDetailsContainer = document.querySelector(".deal-details-container");
+            if (event.state && event.state.page === 'details' && dealDetailsContainer.style.display === "block") {
+                // Simulera "Go back"-knappens beteende
+                this.handleGoBack();
             }
         };
 
         // Sätt initialt tillstånd för deals-vyn
-        history.replaceState({ page: 'deals' }, '', 'deals.html');
+        history.replaceState({ page: 'deals' }, '', window.location.href);
+    },
+
+    handleGoBack: function () {
+        const dealDetailsHeader = document.querySelector(".deal-details-header");
+        const dealDetailsContainer = document.querySelector(".deal-details-container");
+        const dealRecommendations = document.querySelector(".deal-recommendations");
+        const dealsContainer = document.querySelector(".deals-container");
+        const dealSectionTitle = document.querySelector(".deal-section-title");
+        const dealControls = document.querySelector(".deal-controls");
+
+        if (dealDetailsHeader) dealDetailsHeader.style.display = "none";
+        dealDetailsContainer.style.display = "none";
+        if (dealRecommendations) dealRecommendations.style.display = "none";
+        if (dealsContainer) dealsContainer.style.display = "block";
+        if (dealSectionTitle) dealSectionTitle.style.display = "block";
+        if (dealControls) dealControls.style.display = "flex"; // Visa deal-controls igen
+
+        // Återställ tillståndet till deals-vyn
+        history.pushState({ page: 'deals' }, '', window.location.href);
     },
 
     setupControls: function () {
