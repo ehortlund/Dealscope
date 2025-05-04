@@ -374,7 +374,7 @@ body {
     margin-top: 20px;
     margin-bottom: 10px;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 550;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -462,7 +462,7 @@ body {
 .deal-details-header h2 {
     color: var(--red);
     font-size: 24px;
-    font-weight: 500;
+    font-weight: 550;
     margin-bottom: 10px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
