@@ -46,8 +46,8 @@ const dealScope = {
         window.onpopstate = (event) => {
             console.log("Bakåtnavigering detekterad", event.state); // Felsökningslogg
             const dealDetailsContainer = document.querySelector(".deal-details-container");
-            if (event.state && event.state.page === 'details' && dealDetailsContainer.style.display === "block") {
-                // Simulera "Go back"-knappens beteende
+            if (dealDetailsContainer.style.display === "block") {
+                // Om detaljvyn är öppen, simulera "Go back"-knappens beteende
                 this.handleGoBack();
             }
         };
@@ -72,7 +72,7 @@ const dealScope = {
         if (dealControls) dealControls.style.display = "flex"; // Visa deal-controls igen
 
         // Återställ tillståndet till deals-vyn
-        history.pushState({ page: 'deals' }, '', window.location.href);
+        history.replaceState({ page: 'deals' }, '', window.location.href);
     },
 
     setupControls: function () {
@@ -114,7 +114,7 @@ const dealScope = {
             option.textContent = sortOption;
             option.addEventListener('click', (event) => {
                 sortInput.value = sortOption;
-                sortSuggestions.style.display = 'none';
+                sortSuggestions.style.display = "none";
                 sortInput.classList.remove('active');
                 this.sortDeals(sortOption);
             });
@@ -363,7 +363,7 @@ const dealScope = {
                     if (dealControls) dealControls.style.display = "none"; // Dölj deal-controls
 
                     // Lägg till tillstånd för detaljvyn i historiken
-                    history.pushState({ page: 'details' }, '', `deal-details-${dealTitle}`);
+                    history.pushState({ page: 'details' }, '', window.location.href);
 
                     // Scrolla till toppen av sidan
                     window.scrollTo({ top: 0, behavior: 'smooth' });
