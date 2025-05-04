@@ -61,6 +61,82 @@
         "Northrop Grumman Corporation (<span class=\"stock-symbol\">NYSE: NOC</span>): Provides advanced radar systems and electronic warfare suites.",
         "Raytheon Technologies Corporation (<span class=\"stock-symbol\">NYSE: RTX</span>): Supplies avionics and sensor integration."
       ]
+    },
+    {
+      "title": "Microsoft-Equinix Data Center Expansion Deal",
+      "description": "Microsoft has partnered with Equinix to expand its cloud infrastructure through new data centers to support AI and Azure growth.",
+      "link": "https://www.reuters.com/technology/microsoft-partners-equinix-expand-cloud-infrastructure-2025-02-14",
+      "category": "Technology",
+      "date": "2025-02-14",
+      "dealValue": "$3.5 Billion",
+      "industry": "Cloud Computing and Data Centers",
+      "buyer": "Microsoft Corporation (<span class=\"stock-symbol\">NASDAQ: MSFT</span>)",
+      "seller": "Equinix, Inc. (<span class=\"stock-symbol\">NASDAQ: EQIX</span>)",
+      "impact": "This deal enables Microsoft to scale its Azure cloud services globally, with Equinix providing state-of-the-art data center facilities to support AI workloads and enterprise digital transformation. The partnership strengthens Microsoft’s position in the cloud market and enhances Equinix’s role as a key infrastructure provider.",
+      "subcontractors": [
+        "Schneider Electric SE (<span class=\"stock-symbol\">EPA: SU</span>): Power management and cooling systems for data centers.",
+        "NVIDIA Corporation (<span class=\"stock-symbol\">NASDAQ: NVDA</span>): Supply of GPUs for AI compute infrastructure.",
+        "Fluor Corporation (<span class=\"stock-symbol\">NYSE: FLR</span>): Engineering, procurement, and construction services for data center builds.",
+        "Ciena Corporation (<span class=\"stock-symbol\">NYSE: CIEN</span>): Optical networking equipment for high-speed data connectivity.",
+        "Vertiv Holdings Co (<span class=\"stock-symbol\">NYSE: VRT</span>): Critical infrastructure solutions, including UPS and thermal management."
+      ]
+    },
+    {
+      "title": "Siemens-Indian Railways Locomotive Contract",
+      "description": "Siemens has secured a contract with Indian Railways to manufacture and maintain 1,200 electric locomotives for freight and passenger services.",
+      "link": "https://www.railway-technology.com/news/siemens-indian-railways-locmotive-deal-2025/",
+      "category": "Transportation",
+      "date": "2025-01-15",
+      "dealValue": "$3.2 Billion",
+      "industry": "Railway and Heavy Engineering",
+      "buyer": "Indian Railways",
+      "seller": "Siemens AG (<span class=\"stock-symbol\">ETR: SIE</span>)",
+      "impact": "This deal strengthens India’s rail infrastructure, enabling faster and more efficient freight and passenger transport. Siemens will establish a manufacturing facility in India, boosting local employment and technology transfer, with maintenance services spanning 35 years.",
+      "subcontractors": [
+        "Alstom SA (<span class=\"stock-symbol\">EPA: ALO</span>): Supply of signaling systems and train control technologies.",
+        "Bharat Heavy Electricals Limited (<span class=\"stock-symbol\">BSE: BHEL</span>): Local production of electrical components and traction motors.",
+        "Knorr-Bremse AG (<span class=\"stock-symbol\">ETR: KBX</span>): Braking systems for locomotives.",
+        "Medha Servo Drives Pvt Ltd (Private): Power electronics and control systems for locomotive operations.",
+        "Tata Steel Limited (<span class=\"stock-symbol\">BSE: TATASTEEL</span>): High-strength steel for locomotive chassis and bodies."
+      ]
+    },
+    {
+      "title": "TotalEnergies-Iraq Solar Power Project",
+      "description": "TotalEnergies has signed an agreement with Iraq’s Ministry of Electricity to develop a 1 GW solar power plant as part of the country’s energy transition strategy.",
+      "link": "https://www.reuters.com/business/energy/totalenergies-iraq-solar-deal-2024-12-10",
+      "category": "Renewable Energy",
+      "date": "2024-12-10",
+      "dealValue": "$2.5 Billion",
+      "industry": "Solar Energy",
+      "buyer": "Iraq Ministry of Electricity",
+      "seller": "TotalEnergies SE (<span class=\"stock-symbol\">EPA: TTE</span>)",
+      "impact": "The project supports Iraq’s goal to diversify its energy mix, reducing reliance on fossil fuels. It includes engineering, procurement, and construction of solar farms, with TotalEnergies leading local capacity building and job creation.",
+      "subcontractors": [
+        "First Solar, Inc. (<span class=\"stock-symbol\">NASDAQ: FSLR</span>): Supply of photovoltaic panels for the solar plant.",
+        "Schneider Electric SE (<span class=\"stock-symbol\">EPA: SU</span>): Electrical infrastructure and grid integration systems.",
+        "Sterling and Wilson Solar Limited (Private): EPC services for solar farm construction.",
+        "ABB Ltd (<span class=\"stock-symbol\">NYSE: ABB</span>): Power conversion and distribution equipment.",
+        "Nexans SA (<span class=\"stock-symbol\">EPA: NEX</span>): High-voltage cables for grid connectivity."
+      ]
+    },
+    {
+      "title": "Boeing-South Korea Fighter Jet Upgrade Program",
+      "description": "Boeing has been awarded a contract by South Korea’s Defense Acquisition Program Administration to upgrade its F-15K fighter jets with advanced radar and avionics systems.",
+      "link": "https://www.defensenews.com/air/2025/02/25/boeing-south-korea-f15k-upgrade/",
+      "category": "Military",
+      "date": "2025-02-25",
+      "dealValue": "$1.9 Billion",
+      "industry": "Defense and Aerospace",
+      "buyer": "South Korea Defense Acquisition Program Administration",
+      "seller": "The Boeing Company (<span class=\"stock-symbol\">NYSE: BA</span>)",
+      "impact": "This deal enhances South Korea’s air defense capabilities, modernizing its F-15K fleet with cutting-edge technology. It includes system integration and testing, strengthening Boeing’s presence in the Asia-Pacific defense market.",
+      "subcontractors": [
+        "Raytheon Technologies Corporation (<span class=\"stock-symbol\">NYSE: RTX</span>): Advanced radar systems (APG-82).",
+        "L3Harris Technologies, Inc. (<span class=\"stock-symbol\">NYSE: LHX</span>): Avionics and communication systems.",
+        "Honeywell International Inc. (<span class=\"stock-symbol\">NASDAQ: HON</span>): Navigation and flight control systems.",
+        "Hanwha Systems Co., Ltd. (<span class=\"stock-symbol\">KRX: 272210</span>): Local integration and testing support.",
+        "Korea Aerospace Industries, Ltd. (<span class=\"stock-symbol\">KRX: 047810</span>): Airframe modifications and maintenance."
+      ]
     }
 
   ]
