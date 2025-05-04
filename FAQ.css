@@ -109,7 +109,7 @@ body {
     text-decoration: none;
     border: none;
     padding: 12px 25px;
-    border-radius: 32px;
+    border-radius: 15px;
     margin-top: 20px;
     transition: background-color 0.3s ease, color 0.3s ease;
     text-rendering: optimizeLegibility;
@@ -162,7 +162,7 @@ body {
     font-weight: 500;
     padding: 5px 10px;
     border: 1px solid transparent; /* Ingen cirkel i vanligt läge */
-    border-radius: 20px; /* Rundad effekt vid hover */
+    border-radius: 15px; /* Rundad effekt vid hover */
     transition: all 0.3s ease; /* Smidig övergång */
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
