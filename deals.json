@@ -137,6 +137,63 @@
         "Hanwha Systems Co., Ltd. (<span class=\"stock-symbol\">KRX: 272210</span>): Local integration and testing support.",
         "Korea Aerospace Industries, Ltd. (<span class=\"stock-symbol\">KRX: 047810</span>): Airframe modifications and maintenance."
       ]
+    },
+    {
+      "title": "Airbus-Spirit AeroSystems Aerostructures Acquisition",
+      "description": "Airbus has agreed to acquire Spirit AeroSystems’ Europe-focused aerostructures business, including facilities and programs previously spun off by Boeing.",
+      "link": "https://www.reuters.com/business/aerospace-defense/airbus-take-spirit-aerosystems-europe-focused-activities-2025-04-28",
+      "category": "Aerospace",
+      "date": "2025-04-28",
+      "dealValue": "$1.2 Billion",
+      "industry": "Aerospace and Defense",
+      "buyer": "Airbus SE (<span class=\"stock-symbol\">EPA: AIR</span>)",
+      "seller": "Spirit AeroSystems Holdings, Inc. (<span class=\"stock-symbol\">NYSE: SPR</span>)",
+      "impact": "This acquisition strengthens Airbus’s control over its supply chain, integrating Spirit’s European facilities and programs like A350 fuselage production. It supports Airbus’s strategy to enhance operational efficiency and secure critical aerostructures capabilities amid rising global demand for commercial aircraft.",
+      "subcontractors": [
+        "GKN Aerospace (Part of Melrose Industries PLC, <span class=\"stock-symbol\">LSE: MRO</span>): Composite components and wing structures.",
+        "Safran SA (<span class=\"stock-symbol\">EPA: SAF</span>): Landing gear systems and nacelle components.",
+        "Leonardo S.p.A. (<span class=\"stock-symbol\">BIT: LDO</span>): Fuselage sections and tail assemblies.",
+        "MTU Aero Engines AG (<span class=\"stock-symbol\">ETR: MTX</span>): Engine components and maintenance services.",
+        "Premium AEROTEC (Private, Airbus subsidiary): Structural assemblies and machining."
+      ]
+    },
+    {
+      "title": "Vinci-Norway Offshore Wind Farm Construction",
+      "description": "Vinci has been contracted by Norway’s Equinor to construct the foundation and infrastructure for the Hywind Tampen offshore wind farm expansion.",
+      "link": "https://www.offshore-energy.biz/vinci-equinor-hywind-tampen-expansion-2025-03-15",
+      "category": "Renewable Energy",
+      "date": "2025-03-15",
+      "dealValue": "$2.1 Billion",
+      "industry": "Offshore Wind Energy",
+      "buyer": "Equinor ASA (<span class=\"stock-symbol\">OSE: EQNR</span>)",
+      "seller": "Vinci SA (<span class=\"stock-symbol\">EPA: DG</span>)",
+      "impact": "The project expands Norway’s offshore wind capacity, supporting Europe’s renewable energy goals. Vinci’s expertise in marine construction will ensure the delivery of floating wind turbine foundations, boosting local supply chains and green energy production.",
+      "subcontractors": [
+        "Siemens Gamesa Renewable Energy (<span class=\"stock-symbol\">BME: SGRE</span>): Turbine supply and installation.",
+        "Nexans SA (<span class=\"stock-symbol\">EPA: NEX</span>): Subsea cabling and grid connection systems.",
+        "Saipem S.p.A. (<span class=\"stock-symbol\">BIT: SPM</span>): Offshore installation and heavy-lift operations.",
+        "Aker Solutions ASA (<span class=\"stock-symbol\">OSE: AKSO</span>): Subsea infrastructure and mooring systems.",
+        "OHT (Private, Offshore Heavy Transport): Specialized transport for turbine components."
+      ]
+    },
+    {
+      "title": "Lockheed Martin-Australia Missile Defense Program",
+      "description": "Lockheed Martin has been awarded a contract by Australia’s Department of Defence to develop and supply advanced missile defense systems, including Aegis and Patriot systems.",
+      "link": "https://www.defensenews.com/global/asia-pacific/2025/04-10/lockheed-australia-missile-defense",
+      "category": "Military",
+      "date": "2025-04-10",
+      "dealValue": "$2.8 Billion",
+      "industry": "Defense and Aerospace",
+      "buyer": "Australian Department of Defence",
+      "seller": "Lockheed Martin Corporation (<span class=\"stock-symbol\">NYSE: LMT</span>)",
+      "impact": "This deal enhances Australia’s missile defense capabilities, integrating advanced radar and interceptor systems to counter regional threats. It includes technology transfer and local production, strengthening Australia’s defense industry.",
+      "subcontractors": [
+        "Raytheon Technologies Corporation (<span class=\"stock-symbol\">NYSE: RTX</span>): Patriot missile systems and radar integration.",
+        "BAE Systems PLC (<span class=\"stock-symbol\">LSE: BA</span>): Electronic warfare and sensor systems.",
+        "Northrop Grumman Corporation (<span class=\"stock-symbol\">NYSE: NOC</span>): Command and control systems.",
+        "CEA Technologies (Private): Phased-array radar systems for Aegis integration.",
+        "Austal Limited (<span class=\"stock-symbol\">ASX: ASB</span>): Local manufacturing and integration support."
+      ]
     }
 
   ]

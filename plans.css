@@ -242,7 +242,7 @@ body {
     position: relative;
     background: var(--medium-white);
     padding: 20px;
-    border-radius: 32px;
+    border-radius: 20px;
     width: 300px;
     transition: transform 0.3s ease-in-out;
 }
