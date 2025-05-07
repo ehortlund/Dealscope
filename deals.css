@@ -452,6 +452,9 @@ body {
     color: var(--red);
 }
 
+
+
+
 /* Detaljsida */
 .deal-details-header {
     text-align: center;
@@ -461,13 +464,14 @@ body {
 
 .deal-details-header h2 {
     color: var(--red);
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 550;
     margin-bottom: 10px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 1.3px;
+
 }
 
 .deal-details-header p {

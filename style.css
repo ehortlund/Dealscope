@@ -310,12 +310,34 @@ body {
 }
 
 
+/* Animation för att skifta gradienten */
+@keyframes gradientShift {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 200%;
+    }
+}
+
 .highlight2 {
     color: var(--red);
+    background: linear-gradient(90deg, var(--red), var(--medium-white), var(--red)); /* Gradient från rött till vitt och tillbaka */
+    background-size: 200%; /* Gör gradienten bredare för att skapa en skiftande effekt */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* Gör texten transparent så att gradienten syns */
+    animation: gradientShift 2s linear infinite; /* Animera gradienten */
 }
 
 .highlight {
     color: var(--red);
+    background: linear-gradient(90deg, var(--red), var(--medium-white), var(--red)); /* Gradient från rött till vitt och tillbaka */
+    background-size: 200%; /* Gör gradienten bredare för att skapa en skiftande effekt */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* Gör texten transparent så att gradienten syns */
+    animation: gradientShift 2s linear infinite; /* Animera gradienten */
 }
 
 /* Insights Section */
@@ -564,7 +586,6 @@ body {
     font-size: 18px;
     ...
     */
-    margin-bottom: 60px; /* Avstånd till nästa sektion */
 }
   
 
