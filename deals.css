@@ -484,7 +484,7 @@ body {
 }
 
 .deal-details-container {
-    background-color: rgb(32 32 32 / 22%);
+    background-color: rgba(49, 49, 49, 0.22);
     padding: 30px;
     margin: 0px auto;
     margin-bottom: 100px;
