@@ -251,7 +251,7 @@ body {
     margin-top: 0;
     margin-bottom: 85px;
     text-align: left;
-    color: var(--medium-white)
+    color: var(--medium-white);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -270,8 +270,7 @@ body {
     padding-bottom: 20px;
 }
 
-.faq-section .faq-item:last-child {
-}
+
 
 .faq-section .faq-question {
     font-size: 16px;
@@ -547,7 +546,6 @@ body {
 
     .footer-links-section li {
         margin-bottom: 5px; /* Avstånd mellan länkar */
-        padding-right: ;
     }
 
     .footer-links-section a {

@@ -543,8 +543,7 @@ body {
 }
 
 /* Rekommendationer under deal-details */
-.deal-recommendations {
-}
+
 
 .deal-recommendations-title {
     text-align: center;
@@ -1212,21 +1211,20 @@ body {
     }
 }
 
+
 @media only screen and (min-width: 768px) and (max-width: 768px) and (min-height: 1024px) and (max-height: 1024px) and (orientation: portrait) {
-    .hero {
-        min-height: 50vh;
-        margin-bottom: 0;
+   
+    .deal-controls {
+        padding-left: 0px;
+        margin-left: 100px;
+    }   
+
+    .deal-section-title {
+        text-align: center;
     }
 
-    .features {
-        margin-top: -50px;
-    }
-
-    .feature-list {
-        gap: 50px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
+    .deal-details {
+        padding-left: 270px;
     }
 }
 
