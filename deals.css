@@ -233,6 +233,18 @@ body {
     cursor: pointer;
 }
 
+
+/* Dölj horisontell scrollbar för deal-controls */
+.deal-controls {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer och äldre Edge */
+}
+
+/* För Webkit-webbläsare (Chrome, Safari, Edge) */
+.deal-controls::-webkit-scrollbar {
+    display: none;
+}
+
 #deal-search {
     color: var(--soft-white);
     cursor: text;
@@ -791,6 +803,10 @@ body {
 
     .deal-section {
         padding: 0px;
+    }
+
+    .deals-container {
+        margin-top: 40px;
     }
 
     .deal-dashboard-wrapper {
