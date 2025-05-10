@@ -254,6 +254,13 @@ body {
     margin-top: 55px;
 }
 
+/* Behållare för titeln och statusindikatorn */
+.deal-section-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Avstånd mellan titel och status */
+}
+
 .deal-section-title {
     margin-top: 150px;
     font-weight: 600;
@@ -266,6 +273,78 @@ body {
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 1.3px;
     text-align: left;
+}
+
+/* Behållare för Status: Online och rullande text */
+.status-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    border: 1px solid var(--green);
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-top: 150px;
+}
+
+/* Styling för Status: Online */
+.status-online {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    background-size: 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: var(--green);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
+}
+
+/* Behållare för rullande text */
+.live-status-wrapper {
+    width: 250px; /* Fast bredd för att säkerställa att texten rullar korrekt */
+    overflow: hidden;
+    white-space: nowrap;
+    display: block; /* Säkerställ att wrappern är ett blockelement */
+}
+
+/* Styling för rullande text */
+.live-status {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--green);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 1.3px;
+    animation: scrollLeft 4s linear infinite;
+    padding-right: 20px; /* Lägg till padding för att skapa utrymme mellan upprepningar */
+}
+
+
+
+/* Animation för att skifta gradienten */
+@keyframes gradientShift {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 200%;
+    }
+}
+
+/* Animation för att få texten att rulla horisontellt */
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 .no-deals-message {
@@ -789,6 +868,23 @@ body {
         margin-top: 120px;
         font-size: 28px;
         text-align: center;
+    }
+
+    .deal-section-title-wrapper {
+        flex-direction: column; /* Stapla titel och status vertikalt på mobil */
+        align-items: center;
+        gap: 5px;
+    }
+    .deal-section-title {
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 120px;
+        font-size: 28px;
+        text-align: center;
+    }
+    .status-online {
+        font-size: 14px;
+        animation: gradientShift 4s linear infinite;
     }
 
     .deal-section-heading {

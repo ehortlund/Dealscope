@@ -442,7 +442,8 @@ const dealScope = {
                 observer.observe(fadeIn);
             });
         });
-    }
+    },
+
 };
 
 dealScope.init();

@@ -39,7 +39,16 @@
 
     <!-- Deal Section -->
     <section class="deal-section">
-        <h1 class="deal-section-title fade-in">Deal Dashboard</h1>
+        <div class="deal-section-title-wrapper fade-in">
+            <h2 class="deal-section-title">Deal Dashboard</h2>
+            <div class="status-container">
+              <span class="status-online">Status: Online</span>
+              <div class="live-status-wrapper">
+                <span class="live-status" id="live-status-text"></span> <!-- Ta bort statisk text -->
+              </div>
+            </div>
+          </div>
+        
         <div class="deal-dashboard-wrapper">
             <!-- Sökfält, kategori och sort by -->
                 <div class="deal-controls">
@@ -65,6 +74,7 @@
                 <button class="back-button fade-in">Go back</button>
             </div>
         </div>
+
     </section>
 
     <footer class="footer">
@@ -92,6 +102,9 @@
       </div>
     </footer>
 
+    <!-- Ladda in script.js först -->
     <script src="script.js"></script>
+    <!-- Ladda in live-status.js efter script.js -->
+    <script src="live-status.js"></script>
 </body>
 </html>
