@@ -337,6 +337,8 @@ body {
     letter-spacing: 1.3px;
     animation: scrollLeft 7s linear forwards; /* Använd forwards för att animationen ska slutföra */
     padding-right: 40px; /* Lägg till padding för att skapa utrymme mellan upprepningar */
+    opacity: 0.7; /* Lägg till opacitet för en mer transparent känsla */
+
 }
 
 
