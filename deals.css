@@ -280,11 +280,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 4px;
     border: 1px solid var(--green);
     padding: 5px 10px;
     border-radius: 15px;
-    margin-top: 150px;
+    margin-left: 55px; /* Samma marginal som titeln för att aligna dem */
+    margin-bottom: 16px; /* Avstånd till deal-controls */
+    max-width: 250px;
 }
 
 /* Styling för Status: Online */
@@ -321,7 +322,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 1.3px;
-    animation: scrollLeft 4s linear infinite;
+    animation: scrollLeft 6s linear infinite;
     padding-right: 20px; /* Lägg till padding för att skapa utrymme mellan upprepningar */
 }
 
@@ -1003,6 +1004,22 @@ body {
         font-size: 12px;
         padding: 5px 10px;
         border-radius: 9px;
+    }
+
+    .status-online {
+    font-size: 12px;
+    }
+    .live-status {
+        font-size: 12px;
+        animation: scrollLeft 8s linear infinite;
+    }
+
+    .status-container {
+        align-items: center;
+        margin-left: auto; /* Centrera genom att sätta auto-marginaler */
+        margin-right: auto;
+        padding: 2px 8px;
+        max-width: 240px;
     }
 }
 
