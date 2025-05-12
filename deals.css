@@ -202,6 +202,20 @@ body {
 
 /* Deal-sektion */
 
+/* Förhindra autofyll-styling på Sort by och Category */
+#deal-category,
+#deal-sort {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Förhindra gul bakgrund vid autofyll (Chrome) */
+#deal-category:-webkit-autofill,
+#deal-sort:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    -webkit-text-fill-color: var(--medium-white) !important;
+}
 
 
 .deal-controls {
@@ -875,7 +889,7 @@ body {
     .deal-section-title {
         margin-left: 0;
         margin-right: 0;
-        margin-top: 120px;
+        margin-top: 100px;
         font-size: 28px;
         text-align: center;
     }
@@ -904,7 +918,7 @@ body {
     }
 
     .deal-details-header {
-        margin-top: 100px;
+        margin-top: 50px;
     }
     
     .deal-details-header h2 {
@@ -1007,7 +1021,7 @@ body {
     }
     .live-status {
         font-size: 12px;
-        animation: scrollLeft 8s linear infinite;
+        animation: scrollLeft 5s linear forwards;
     }
 
     .status-container {
