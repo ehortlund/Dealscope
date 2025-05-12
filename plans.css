@@ -504,6 +504,14 @@ body {
     .footer-links-section {
     text-align: center ;
     }
+
+    .plans {
+        padding-top: 80px;
+    }
+
+    .price {
+        font-weight: 550;
+    }
 }
 
 /* Mobilanpassning */
