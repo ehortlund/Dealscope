@@ -145,6 +145,9 @@ const dealScope = {
             const isVisible = categorySuggestions.style.display === 'block';
             categorySuggestions.style.display = isVisible ? 'none' : 'block';
             categoryInput.classList.toggle('active', !isVisible);
+            if (isVisible) {
+                categoryInput.blur(); // Ta bort fokus för att förhindra autofyll
+            }
         });
 
         categoryInput.addEventListener('blur', () => {
@@ -160,6 +163,9 @@ const dealScope = {
             const isVisible = sortSuggestions.style.display === 'block';
             sortSuggestions.style.display = isVisible ? 'none' : 'block';
             sortInput.classList.toggle('active', !isVisible);
+            if (isVisible) {
+                sortInput.blur(); // Ta bort fokus för att förhindra autofyll
+            }
         });
 
         sortInput.addEventListener('blur', () => {
