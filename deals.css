@@ -321,7 +321,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 1.3px;
-    animation: scrollLeft 7s linear forwards; /* Använd forwards för att animationen ska slutföra */
+    animation: scrollLeft 5s linear forwards; /* Använd forwards för att animationen ska slutföra */
     padding-right: 40px; /* Lägg till padding för att skapa utrymme mellan upprepningar */
 
 }
