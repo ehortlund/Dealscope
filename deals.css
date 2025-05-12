@@ -292,7 +292,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border: 1px solid var(--green);
+    border: 0.7px solid var(--green);
     padding: 5px 10px;
     border-radius: 15px;
     margin-left: 55px; /* Samma marginal som titeln för att aligna dem */
@@ -300,20 +300,6 @@ body {
     max-width: 250px;
 }
 
-/* Styling för Status: Online */
-.status-online {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    background-size: 200%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: var(--green);
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    letter-spacing: 1.3px;
-}
 
 /* Behållare för rullande text */
 .live-status-wrapper {
@@ -329,7 +315,7 @@ body {
     display: inline-block;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 350;
     color: var(--green);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -337,7 +323,6 @@ body {
     letter-spacing: 1.3px;
     animation: scrollLeft 7s linear forwards; /* Använd forwards för att animationen ska slutföra */
     padding-right: 40px; /* Lägg till padding för att skapa utrymme mellan upprepningar */
-    opacity: 0.7; /* Lägg till opacitet för en mer transparent känsla */
 
 }
 
