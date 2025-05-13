@@ -358,6 +358,7 @@ body {
 
 
 .select-plan {
+    font-family: 'Poppins', sans-serif;
     background:var(--red);
     color: white;
     border: none;
@@ -507,6 +508,8 @@ body {
 
     .plans {
         padding-top: 80px;
+        padding-bottom: 100px;
+        margin-bottom: 0;
     }
 
 }
